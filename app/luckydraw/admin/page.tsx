@@ -22,6 +22,7 @@ interface Prize {
   totalQty: number;
   remainingQty: number;
 }
+ㅎ;
 
 interface DrawHistory {
   date: string;
@@ -29,30 +30,20 @@ interface DrawHistory {
   prizeId: number;
 }
 
-const initialPrizes: Prize[] = [
-  { id: 1, name: "무선 마우스", totalQty: 10, remainingQty: 8 },
-  { id: 2, name: "USB 메모리", totalQty: 15, remainingQty: 12 },
-  { id: 3, name: "노트북 파우치", totalQty: 20, remainingQty: 18 },
-  { id: 4, name: "인텔 스티커팩", totalQty: 30, remainingQty: 25 },
-  { id: 5, name: "에코백", totalQty: 25, remainingQty: 20 },
-  { id: 6, name: "텀블러", totalQty: 12, remainingQty: 10 },
-  { id: 7, name: "무선 충전기", totalQty: 8, remainingQty: 6 },
-];
-
 export default function AdminPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [prizes, setPrizes] = useState<Prize[]>(initialPrizes);
+  const [prizes, setPrizes] = useState<Prize[]>([]);
   const [drawHistory, setDrawHistory] = useState<DrawHistory[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editValues, setEditValues] = useState<{
     totalQty: number;
     remainingQty: number;
   }>({ totalQty: 0, remainingQty: 0 });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check if already authenticated in this session
     const authStatus = sessionStorage.getItem("intel-admin-auth");
     if (authStatus === "true") {
       setIsAuthenticated(true);
@@ -61,27 +52,57 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Load prizes
-      const storedPrizes = localStorage.getItem("intel-prizes");
-      if (storedPrizes) {
-        try {
-          setPrizes(JSON.parse(storedPrizes));
-        } catch (e) {
-          console.error("[v0] Failed to parse prizes:", e);
-        }
-      }
+      loadPrizes();
 
-      // Load draw history
+      // Load draw history from localStorage
       const storedHistory = localStorage.getItem("intel-draw-history");
       if (storedHistory) {
         try {
           setDrawHistory(JSON.parse(storedHistory));
         } catch (e) {
-          console.error("[v0] Failed to parse history:", e);
+          console.error("Failed to parse history:", e);
         }
       }
     }
   }, [isAuthenticated]);
+
+  const loadPrizes = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/sheets");
+      const data = await response.json();
+      if (data.prizes) {
+        setPrizes(data.prizes);
+      }
+    } catch (error) {
+      console.error("Error loading prizes:", error);
+      alert("상품 목록을 불러오는데 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const savePrizes = async (updatedPrizes: Prize[]) => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/sheets", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prizes: updatedPrizes }),
+      });
+
+      if (response.ok) {
+        setPrizes(updatedPrizes);
+      } else {
+        alert("저장에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error saving prizes:", error);
+      alert("저장 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +122,7 @@ export default function AdminPage() {
     });
   };
 
-  const saveEdit = (id: number) => {
+  const saveEdit = async (id: number) => {
     const updatedPrizes = prizes.map((p) =>
       p.id === id
         ? {
@@ -111,8 +132,8 @@ export default function AdminPage() {
           }
         : p
     );
-    setPrizes(updatedPrizes);
-    localStorage.setItem("intel-prizes", JSON.stringify(updatedPrizes));
+
+    await savePrizes(updatedPrizes);
     setEditingId(null);
   };
 
@@ -120,7 +141,6 @@ export default function AdminPage() {
     setEditingId(null);
   };
 
-  // Group history by date
   const historyByDate = drawHistory.reduce((acc, item) => {
     const date = new Date(item.date).toLocaleDateString("ko-KR");
     if (!acc[date]) {
@@ -172,12 +192,16 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl font-bold text-gray-900">관리자 페이지</h1>
-          <Button onClick={() => router.push("/")} variant="outline">
-            메인으로 돌아가기
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={loadPrizes} variant="outline" disabled={loading}>
+              {loading ? "로딩 중..." : "새로고침"}
+            </Button>
+            <Button onClick={() => router.push("/")} variant="outline">
+              메인으로 돌아가기
+            </Button>
+          </div>
         </div>
 
-        {/* Prize Inventory Management */}
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">상품 재고 관리</CardTitle>
@@ -244,13 +268,18 @@ export default function AdminPage() {
                     <TableCell className="text-center">
                       {editingId === prize.id ? (
                         <div className="flex gap-2 justify-center">
-                          <Button size="sm" onClick={() => saveEdit(prize.id)}>
+                          <Button
+                            size="sm"
+                            onClick={() => saveEdit(prize.id)}
+                            disabled={loading}
+                          >
                             저장
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={cancelEdit}
+                            disabled={loading}
                           >
                             취소
                           </Button>
@@ -260,6 +289,7 @@ export default function AdminPage() {
                           size="sm"
                           variant="outline"
                           onClick={() => startEdit(prize)}
+                          disabled={loading}
                         >
                           수정
                         </Button>
@@ -272,7 +302,6 @@ export default function AdminPage() {
           </CardContent>
         </Card>
 
-        {/* Daily Statistics */}
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">일별 추첨 통계</CardTitle>
