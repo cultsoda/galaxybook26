@@ -196,6 +196,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$n
 ;
 ;
 ;
+// 애니메이션 스타일 정의 추가
+const flipAnimationStyle = `
+  @keyframes flip-next {
+    0% { transform: rotateY(0deg); opacity: 1; }
+    50% { transform: rotateY(-90deg); opacity: 0.5; }
+    100% { transform: rotateY(-180deg); opacity: 0; }
+  }
+  .animate-flip {
+    animation: flip-next 0.4s ease-in-out;
+    perspective: 1000px;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+`;
 const storyPages = [
     "책책이는 마법의 숲에서 태어난 AI 친구입니다.",
     "책책이는 인터넷 없이도 노트북 안에서 작동해요.",
@@ -257,7 +272,7 @@ function StoryboardPage() {
             setTimeout(()=>{
                 setStoryIndex(storyIndex + 1);
                 setIsFlipping(false);
-            }, 300);
+            }, 400); // 애니메이션 속도에 맞춰 400ms로 변경
         } else {
             setStep("quiz");
         }
@@ -297,12 +312,12 @@ function StoryboardPage() {
                             className: "w-full h-full object-cover"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 122,
+                            lineNumber: 138,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 121,
+                        lineNumber: 137,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -312,18 +327,18 @@ function StoryboardPage() {
                         children: "시작하기"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 129,
+                        lineNumber: 145,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                lineNumber: 120,
+                lineNumber: 136,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-            lineNumber: 119,
+            lineNumber: 135,
             columnNumber: 7
         }, this);
     }
@@ -339,7 +354,7 @@ function StoryboardPage() {
                         children: "책책이와 함께하는 AI 퀴즈"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 146,
+                        lineNumber: 162,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -348,14 +363,14 @@ function StoryboardPage() {
                             "먼저 책책이의 이야기를 읽어보세요.",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 151,
+                                lineNumber: 167,
                                 columnNumber: 13
                             }, this),
                             "그 다음 5개의 퀴즈를 풀어보세요!"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 149,
+                        lineNumber: 165,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -365,18 +380,18 @@ function StoryboardPage() {
                         children: "퀴즈 시작"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 153,
+                        lineNumber: 169,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                lineNumber: 145,
+                lineNumber: 161,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-            lineNumber: 144,
+            lineNumber: 160,
             columnNumber: 7
         }, this);
     }
@@ -384,104 +399,124 @@ function StoryboardPage() {
     if (step === "story") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
             className: "min-h-screen flex flex-col items-center justify-center gap-8 p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-full max-w-3xl",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mb-4 text-center",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "text-xl font-semibold text-purple-700",
-                            children: [
-                                storyIndex + 1,
-                                " / ",
-                                storyPages.length
-                            ]
-                        }, void 0, true, {
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("style", {
+                    children: flipAnimationStyle
+                }, void 0, false, {
+                    fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                    lineNumber: 185,
+                    columnNumber: 9
+                }, this),
+                " ",
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "w-full max-w-3xl",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "mb-4 text-center",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-xl font-semibold text-purple-700",
+                                children: [
+                                    storyIndex + 1,
+                                    " / ",
+                                    storyPages.length
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                lineNumber: 188,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 171,
-                            columnNumber: 13
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 170,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
-                        className: `p-12 bg-white shadow-xl transition-all duration-300 ${isFlipping ? "scale-95 opacity-50" : "scale-100 opacity-100"}`,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col items-center gap-8",
+                            lineNumber: 187,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "perspective-1000",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-300",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                        src: `/storyboard/story-${storyIndex + 1}.jpeg`,
-                                        alt: `스토리 ${storyIndex + 1}`,
-                                        className: "w-full h-full object-cover"
-                                    }, void 0, false, {
+                                " ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
+                                    className: `p-12 bg-white shadow-xl transition-all duration-400 ${isFlipping ? "animate-flip" : "transform-none"}`,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex flex-col items-center gap-8",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-300",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                    src: `/storyboard/story-${storyIndex + 1}.jpeg`,
+                                                    alt: `스토리 ${storyIndex + 1}`,
+                                                    className: "w-full h-full object-cover"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                                    lineNumber: 202,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                                lineNumber: 201,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: "text-3xl text-gray-800 font-medium text-center leading-relaxed",
+                                                children: storyPages[storyIndex]
+                                            }, void 0, false, {
+                                                fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                                lineNumber: 208,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                        lineNumber: 182,
-                                        columnNumber: 17
+                                        lineNumber: 200,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                    lineNumber: 181,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-3xl text-gray-800 font-medium text-center leading-relaxed",
-                                    children: storyPages[storyIndex]
-                                }, void 0, false, {
-                                    fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                    lineNumber: 189,
-                                    columnNumber: 15
+                                    lineNumber: 195,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 180,
-                            columnNumber: 13
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 175,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex justify-center mt-8",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                            size: "lg",
-                            onClick: handleStoryNext,
-                            disabled: isFlipping,
-                            className: "h-16 px-12 text-xl bg-purple-600 hover:bg-purple-700 text-white",
-                            children: [
-                                "다음 ",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
-                                    className: "ml-2 h-6 w-6"
-                                }, void 0, false, {
-                                    fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                    lineNumber: 201,
-                                    columnNumber: 18
-                                }, this)
-                            ]
-                        }, void 0, true, {
+                            lineNumber: 192,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex justify-center mt-8",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                size: "lg",
+                                onClick: handleStoryNext,
+                                disabled: isFlipping,
+                                className: "h-16 px-12 text-xl bg-purple-600 hover:bg-purple-700 text-white",
+                                children: [
+                                    storyIndex === storyPages.length - 1 ? "퀴즈 풀러 가기" : "다음 >",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
+                                        className: "ml-2 h-6 w-6"
+                                    }, void 0, false, {
+                                        fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                        lineNumber: 224,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                                lineNumber: 215,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 195,
-                            columnNumber: 13
+                            lineNumber: 214,
+                            columnNumber: 11
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 194,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                lineNumber: 169,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
+                    lineNumber: 186,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-            lineNumber: 168,
+            lineNumber: 184,
             columnNumber: 7
         }, this);
     }
@@ -507,12 +542,12 @@ function StoryboardPage() {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 219,
+                            lineNumber: 242,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 218,
+                        lineNumber: 241,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -523,7 +558,7 @@ function StoryboardPage() {
                                 children: currentQuiz.question
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 224,
+                                lineNumber: 247,
                                 columnNumber: 13
                             }, this),
                             !showFeedback ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -538,7 +573,7 @@ function StoryboardPage() {
                                                 children: "O"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 231,
+                                                lineNumber: 254,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -548,13 +583,13 @@ function StoryboardPage() {
                                                 children: "X"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 238,
+                                                lineNumber: 261,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                        lineNumber: 230,
+                                        lineNumber: 253,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -567,7 +602,7 @@ function StoryboardPage() {
                                                 children: showHint ? "힌트 숨기기" : "힌트 보기"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 248,
+                                                lineNumber: 271,
                                                 columnNumber: 19
                                             }, this),
                                             showHint && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -578,13 +613,13 @@ function StoryboardPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 256,
+                                                lineNumber: 279,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                        lineNumber: 247,
+                                        lineNumber: 270,
                                         columnNumber: 17
                                     }, this)
                                 ]
@@ -602,7 +637,7 @@ function StoryboardPage() {
                                                             className: "h-8 w-8 text-green-600"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 274,
+                                                            lineNumber: 297,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -610,7 +645,7 @@ function StoryboardPage() {
                                                             children: "정답입니다!"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 275,
+                                                            lineNumber: 298,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
@@ -620,7 +655,7 @@ function StoryboardPage() {
                                                             className: "h-8 w-8 text-red-600"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 281,
+                                                            lineNumber: 304,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -628,14 +663,14 @@ function StoryboardPage() {
                                                             children: "오답입니다!"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 282,
+                                                            lineNumber: 305,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 271,
+                                                lineNumber: 294,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -643,13 +678,13 @@ function StoryboardPage() {
                                                 children: currentQuiz.explanation
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 288,
+                                                lineNumber: 311,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                        lineNumber: 264,
+                                        lineNumber: 287,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -661,35 +696,35 @@ function StoryboardPage() {
                                             children: quizIndex < quizData.length - 1 ? "다음 문제" : "결과 보기"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                            lineNumber: 294,
+                                            lineNumber: 317,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                        lineNumber: 293,
+                                        lineNumber: 316,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 263,
+                                lineNumber: 286,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 223,
+                        lineNumber: 246,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                lineNumber: 217,
+                lineNumber: 240,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-            lineNumber: 216,
+            lineNumber: 239,
             columnNumber: 7
         }, this);
     }
@@ -709,7 +744,7 @@ function StoryboardPage() {
                                 children: "퀴즈 완료!"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 320,
+                                lineNumber: 343,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -722,13 +757,13 @@ function StoryboardPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 323,
+                                lineNumber: 346,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 319,
+                        lineNumber: 342,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -747,18 +782,18 @@ function StoryboardPage() {
                                                 className: "h-8 w-8 text-green-600"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 344,
+                                                lineNumber: 367,
                                                 columnNumber: 25
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$x$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__XCircle$3e$__["XCircle"], {
                                                 className: "h-8 w-8 text-red-600"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                lineNumber: 346,
+                                                lineNumber: 369,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                            lineNumber: 342,
+                                            lineNumber: 365,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -773,7 +808,7 @@ function StoryboardPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 373,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -787,7 +822,7 @@ function StoryboardPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 354,
+                                                            lineNumber: 377,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -799,36 +834,36 @@ function StoryboardPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                            lineNumber: 357,
+                                                            lineNumber: 380,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                                    lineNumber: 353,
+                                                    lineNumber: 376,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                            lineNumber: 349,
+                                            lineNumber: 372,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                    lineNumber: 341,
+                                    lineNumber: 364,
                                     columnNumber: 19
                                 }, this)
                             }, index, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                lineNumber: 333,
+                                lineNumber: 356,
                                 columnNumber: 17
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 328,
+                        lineNumber: 351,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -842,30 +877,30 @@ function StoryboardPage() {
                                     className: "mr-2 h-6 w-6"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                                    lineNumber: 375,
+                                    lineNumber: 398,
                                     columnNumber: 15
                                 }, this),
                                 "처음으로"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                            lineNumber: 370,
+                            lineNumber: 393,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                        lineNumber: 369,
+                        lineNumber: 392,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-                lineNumber: 318,
+                lineNumber: 341,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",
-            lineNumber: 317,
+            lineNumber: 340,
             columnNumber: 7
         }, this);
     }

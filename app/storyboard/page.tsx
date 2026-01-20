@@ -7,6 +7,22 @@ import { CheckCircle2, XCircle, ChevronRight, Home } from "lucide-react";
 
 type Step = "waiting" | "intro" | "story" | "quiz" | "results";
 
+// 애니메이션 스타일 정의 추가
+const flipAnimationStyle = `
+  @keyframes flip-next {
+    0% { transform: rotateY(0deg); opacity: 1; }
+    50% { transform: rotateY(-90deg); opacity: 0.5; }
+    100% { transform: rotateY(-180deg); opacity: 0; }
+  }
+  .animate-flip {
+    animation: flip-next 0.4s ease-in-out;
+    perspective: 1000px;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+`;
+
 const storyPages = [
   "책책이는 마법의 숲에서 태어난 AI 친구입니다.",
   "책책이는 인터넷 없이도 노트북 안에서 작동해요.",
@@ -84,7 +100,7 @@ export default function StoryboardPage() {
       setTimeout(() => {
         setStoryIndex(storyIndex + 1);
         setIsFlipping(false);
-      }, 300);
+      }, 400); // 애니메이션 속도에 맞춰 400ms로 변경
     } else {
       setStep("quiz");
     }
@@ -166,31 +182,35 @@ export default function StoryboardPage() {
   if (step === "story") {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <style>{flipAnimationStyle}</style> {/* 스타일 주입 */}
         <div className="w-full max-w-3xl">
           <div className="mb-4 text-center">
             <span className="text-xl font-semibold text-purple-700">
               {storyIndex + 1} / {storyPages.length}
             </span>
           </div>
-          <Card
-            className={`p-12 bg-white shadow-xl transition-all duration-300 ${
-              isFlipping ? "scale-95 opacity-50" : "scale-100 opacity-100"
-            }`}
-          >
-            <div className="flex flex-col items-center gap-8">
-              <div className="w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-300">
-                <img
-                  src={`/storyboard/story-${storyIndex + 1}.jpeg`}
-                  alt={`스토리 ${storyIndex + 1}`}
-                  className="w-full h-full object-cover"
-                />
+          <div className="perspective-1000">
+            {" "}
+            {/* 원근감 추가 */}
+            <Card
+              className={`p-12 bg-white shadow-xl transition-all duration-400 ${
+                isFlipping ? "animate-flip" : "transform-none"
+              }`}
+            >
+              <div className="flex flex-col items-center gap-8">
+                <div className="w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-300">
+                  <img
+                    src={`/storyboard/story-${storyIndex + 1}.jpeg`}
+                    alt={`스토리 ${storyIndex + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-3xl text-gray-800 font-medium text-center leading-relaxed">
+                  {storyPages[storyIndex]}
+                </p>
               </div>
-
-              <p className="text-3xl text-gray-800 font-medium text-center leading-relaxed">
-                {storyPages[storyIndex]}
-              </p>
-            </div>
-          </Card>
+            </Card>
+          </div>
           <div className="flex justify-center mt-8">
             <Button
               size="lg"
@@ -198,7 +218,10 @@ export default function StoryboardPage() {
               disabled={isFlipping}
               className="h-16 px-12 text-xl bg-purple-600 hover:bg-purple-700 text-white"
             >
-              다음 <ChevronRight className="ml-2 h-6 w-6" />
+              {storyIndex === storyPages.length - 1
+                ? "퀴즈 풀러 가기"
+                : "다음 >"}
+              <ChevronRight className="ml-2 h-6 w-6" />
             </Button>
           </div>
         </div>

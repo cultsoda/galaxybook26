@@ -22,7 +22,6 @@ interface Prize {
   totalQty: number;
   remainingQty: number;
 }
-ㅎ;
 
 interface DrawHistory {
   date: string;
