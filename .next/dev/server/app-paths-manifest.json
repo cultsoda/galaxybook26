@@ -1,4 +1,6 @@
 {
-  "/page": "app/page.js",
-  "/storyboard/page": "app/storyboard/page.js"
+  "/api/sheets/route": "app/api/sheets/route.js",
+  "/luckydraw/admin/page": "app/luckydraw/admin/page.js",
+  "/luckydraw/page": "app/luckydraw/page.js",
+  "/page": "app/page.js"
 }

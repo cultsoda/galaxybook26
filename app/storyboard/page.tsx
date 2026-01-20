@@ -4,22 +4,29 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, XCircle, ChevronRight, Home } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Step = "waiting" | "intro" | "story" | "quiz" | "results";
 
 // 애니메이션 스타일 정의 추가
 const flipAnimationStyle = `
-  @keyframes flip-next {
-    0% { transform: rotateY(0deg); opacity: 1; }
-    50% { transform: rotateY(-90deg); opacity: 0.5; }
-    100% { transform: rotateY(-180deg); opacity: 0; }
+  @keyframes flip-book {
+    0% { 
+      transform: rotateY(0deg); 
+      opacity: 1;
+    }
+    100% { 
+      transform: rotateY(-160deg); /* 180도까지 돌리면 너무 사라지니 160도가 적당합니다 */
+      opacity: 0;
+    }
   }
   .animate-flip {
-    animation: flip-next 0.4s ease-in-out;
-    perspective: 1000px;
+    animation: flip-book 0.5s ease-in-out; /* 조금 더 묵직하게 0.5초 */
+    transform-origin: left; /* 핵심: 왼쪽을 축으로 고정하여 책장처럼 회전 */
+    backface-visibility: hidden;
   }
   .perspective-1000 {
-    perspective: 1000px;
+    perspective: 2000px; /* 원근감을 조절하여 더 자연스럽게 */
   }
 `;
 
@@ -97,10 +104,11 @@ export default function StoryboardPage() {
   const handleStoryNext = () => {
     if (storyIndex < storyPages.length - 1) {
       setIsFlipping(true);
+      // 애니메이션이 '솨라락' 넘어가는 시간(0.6초)과 비슷하게 맞춰줍니다.
       setTimeout(() => {
         setStoryIndex(storyIndex + 1);
         setIsFlipping(false);
-      }, 400); // 애니메이션 속도에 맞춰 400ms로 변경
+      }, 500); // 0.5초 정도로 수정하여 시각적 연결을 부드럽게 함
     } else {
       setStep("quiz");
     }
@@ -179,49 +187,79 @@ export default function StoryboardPage() {
   }
 
   // Story Pages
+  // Story Pages
   if (step === "story") {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-        <style>{flipAnimationStyle}</style> {/* 스타일 주입 */}
-        <div className="w-full max-w-3xl">
-          <div className="mb-4 text-center">
-            <span className="text-xl font-semibold text-purple-700">
+      <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
+        <div className="w-full max-w-3xl flex flex-col">
+          {/* 상단 인디케이터 */}
+          <div className="mb-6 text-center">
+            <span className="text-xl font-semibold text-purple-700 bg-white/50 px-4 py-1 rounded-full shadow-sm">
               {storyIndex + 1} / {storyPages.length}
             </span>
           </div>
-          <div className="perspective-1000">
-            {" "}
-            {/* 원근감 추가 */}
-            <Card
-              className={`p-12 bg-white shadow-xl transition-all duration-400 ${
-                isFlipping ? "animate-flip" : "transform-none"
-              }`}
-            >
-              <div className="flex flex-col items-center gap-8">
-                <div className="w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-300">
-                  <img
-                    src={`/storyboard/story-${storyIndex + 1}.jpeg`}
-                    alt={`스토리 ${storyIndex + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-3xl text-gray-800 font-medium text-center leading-relaxed">
-                  {storyPages[storyIndex]}
-                </p>
-              </div>
-            </Card>
+
+          {/* 애니메이션 영역: 고정 높이를 주어 버튼 위치를 확보합니다 */}
+          <div
+            className="relative h-[600px] w-full mb-8"
+            style={{ perspective: "2500px" }} // 원근감을 더 깊게 주어 유려함 강조
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={storyIndex}
+                initial={{ rotateY: 20, opacity: 0, x: 50 }} // 나타날 때 살짝 오른쪽에서
+                animate={{ rotateY: 0, opacity: 1, x: 0 }} // 제자리
+                exit={{
+                  rotateY: -110, // 왼쪽으로 솨라락 넘어감
+                  opacity: 0,
+                  x: -150, // 왼쪽으로 이동하며 사라짐
+                  transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] }, // 부드러운 가속도 곡선
+                }}
+                transition={{ duration: 0.5 }}
+                style={{
+                  transformOrigin: "left center",
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  backfaceVisibility: "hidden",
+                  zIndex: 1,
+                }}
+              >
+                <Card className="h-full p-12 bg-white shadow-2xl border-l-[12px] border-l-gray-100 flex flex-col items-center justify-between relative overflow-hidden">
+                  {/* 왼쪽 책등 음영 효과 */}
+                  <div className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+
+                  <div className="w-full max-w-2xl aspect-[3/2] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner">
+                    <img
+                      src={`/storyboard/story-${storyIndex + 1}.jpeg`}
+                      alt={`스토리 ${storyIndex + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <p className="text-3xl text-gray-800 font-bold text-center leading-relaxed mt-8 px-4">
+                    {storyPages[storyIndex]}
+                  </p>
+
+                  {/* 장식용 종이 질감 느낌 (선택사항) */}
+                  <div className="w-full h-1 bg-gray-50 mt-4 rounded-full" />
+                </Card>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          <div className="flex justify-center mt-8">
+
+          {/* 하단 버튼 영역 */}
+          <div className="flex justify-center">
             <Button
               size="lg"
               onClick={handleStoryNext}
               disabled={isFlipping}
-              className="h-16 px-12 text-xl bg-purple-600 hover:bg-purple-700 text-white"
+              className="h-20 px-16 text-2xl bg-purple-600 hover:bg-purple-700 text-white shadow-xl active:scale-95 transition-all rounded-2xl"
             >
               {storyIndex === storyPages.length - 1
                 ? "퀴즈 풀러 가기"
-                : "다음 >"}
-              <ChevronRight className="ml-2 h-6 w-6" />
+                : "다음 페이지"}
+              <ChevronRight className="ml-3 h-8 w-8" />
             </Button>
           </div>
         </div>

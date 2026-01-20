@@ -2,7 +2,7 @@ import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-const SHEET_NAME = "Sheet1"; // 시트 이름 (기본값)
+const SHEET_NAME = "시트1"; // 시트 이름 (기본값)
 
 async function getGoogleSheetsClient() {
   const auth = new google.auth.GoogleAuth({
@@ -69,5 +69,27 @@ export async function PUT(request: Request) {
       { error: "Failed to write data" },
       { status: 500 }
     );
+  }
+}
+
+// POST: 당첨 로그 기록 추가
+export async function POST(request: Request) {
+  try {
+    const { prizeName } = await request.json();
+    const sheets = await getGoogleSheetsClient();
+    const now = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `당첨로그!A:B`,
+      valueInputOption: "RAW",
+      requestBody: {
+        values: [[now, prizeName]],
+      },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: "로그 기록 실패" }, { status: 500 });
   }
 }

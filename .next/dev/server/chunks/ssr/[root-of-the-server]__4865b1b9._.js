@@ -72,25 +72,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$n
 ;
 ;
 const metadata = {
-    title: 'Intel Event - 럭키드로우',
-    description: 'Intel 이벤트 터치스크린 경험',
-    generator: 'v0.app',
+    title: "GalaxyBook26 Event - 럭키드로우",
+    description: "GalaxyBook26 이벤트 터치스크린 경험",
+    generator: "v0.app",
     icons: {
         icon: [
             {
-                url: '/icon-light-32x32.png',
-                media: '(prefers-color-scheme: light)'
+                url: "/icon-light-32x32.png",
+                media: "(prefers-color-scheme: light)"
             },
             {
-                url: '/icon-dark-32x32.png',
-                media: '(prefers-color-scheme: dark)'
+                url: "/icon-dark-32x32.png",
+                media: "(prefers-color-scheme: dark)"
             },
             {
-                url: '/icon.svg',
-                type: 'image/svg+xml'
+                url: "/icon.svg",
+                type: "image/svg+xml"
             }
         ],
-        apple: '/apple-icon.png'
+        apple: "/apple-icon.png"
     }
 };
 function RootLayout({ children }) {
