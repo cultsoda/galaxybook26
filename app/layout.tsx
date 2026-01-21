@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GalaxyBook26 Event - 럭키드로우",
-  description: "GalaxyBook26 이벤트 터치스크린 경험",
+  title: "GalaxyBook6 Event - 럭키드로우",
+  description: "GalaxyBook6 이벤트 터치스크린 경험",
   generator: "v0.app",
   icons: {
     icon: [

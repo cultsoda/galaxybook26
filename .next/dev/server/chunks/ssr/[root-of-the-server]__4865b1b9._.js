@@ -72,8 +72,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$n
 ;
 ;
 const metadata = {
-    title: "GalaxyBook26 Event - 럭키드로우",
-    description: "GalaxyBook26 이벤트 터치스크린 경험",
+    title: "GalaxyBook6 Event - 럭키드로우",
+    description: "GalaxyBook6 이벤트 터치스크린 경험",
     generator: "v0.app",
     icons: {
         icon: [

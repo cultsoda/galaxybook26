@@ -6,7 +6,7 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-8 bg-gradient-to-br from-blue-50 to-blue-100">
       <div className="text-center mb-8">
         <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          GalaxyBook26 Event
+          GalaxyBook6 Event
         </h1>
         <p className="text-xl text-gray-600">이벤트를 선택해 주세요</p>
       </div>
