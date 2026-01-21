@@ -144,6 +144,8 @@
     --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
+    --text-7xl: 4.5rem;
+    --text-7xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -987,8 +989,16 @@
     height: calc(var(--spacing) * 24);
   }
 
+  .h-28 {
+    height: calc(var(--spacing) * 28);
+  }
+
   .h-32 {
     height: calc(var(--spacing) * 32);
+  }
+
+  .h-44 {
+    height: calc(var(--spacing) * 44);
   }
 
   .h-\[1\.15rem\] {
@@ -1183,6 +1193,10 @@
     max-width: var(--container-7xl);
   }
 
+  .max-w-\[95vw\] {
+    max-width: 95vw;
+  }
+
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
   }
@@ -1237,6 +1251,14 @@
 
   .flex-1 {
     flex: 1;
+  }
+
+  .flex-\[3\] {
+    flex: 3;
+  }
+
+  .flex-\[7\] {
+    flex: 7;
   }
 
   .flex-shrink-0, .shrink-0 {
@@ -2049,6 +2071,10 @@
     fill: var(--primary);
   }
 
+  .object-contain {
+    object-fit: contain;
+  }
+
   .object-cover {
     object-fit: cover;
   }
@@ -2137,8 +2163,16 @@
     padding-inline: calc(var(--spacing) * 8);
   }
 
+  .px-12 {
+    padding-inline: calc(var(--spacing) * 12);
+  }
+
   .px-16 {
     padding-inline: calc(var(--spacing) * 16);
+  }
+
+  .px-24 {
+    padding-inline: calc(var(--spacing) * 24);
   }
 
   .py-0\.5 {
@@ -2276,6 +2310,11 @@
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+
+  .text-7xl {
+    font-size: var(--text-7xl);
+    line-height: var(--tw-leading, var(--text-7xl--line-height));
   }
 
   .text-base {
@@ -4734,6 +4773,44 @@
   @container field-group (min-width: 28rem) {
     .\@md\/field-group\:has-\[\>\[data-slot\=field-content\]\]\:items-start:has( > [data-slot="field-content"]) {
       align-items: flex-start;
+    }
+  }
+
+  @media (orientation: portrait) {
+    .portrait\:h-\[calc\(100vh-240px\)\] {
+      height: calc(100vh - 240px);
+    }
+  }
+
+  @media (orientation: portrait) {
+    .portrait\:p-6 {
+      padding: calc(var(--spacing) * 6);
+    }
+  }
+
+  @media (orientation: portrait) {
+    .portrait\:text-4xl {
+      font-size: var(--text-4xl);
+      line-height: var(--tw-leading, var(--text-4xl--line-height));
+    }
+  }
+
+  @media (orientation: landscape) {
+    .landscape\:h-\[calc\(100vh-200px\)\] {
+      height: calc(100vh - 200px);
+    }
+  }
+
+  @media (orientation: landscape) {
+    .landscape\:p-4 {
+      padding: calc(var(--spacing) * 4);
+    }
+  }
+
+  @media (orientation: landscape) {
+    .landscape\:text-3xl {
+      font-size: var(--text-3xl);
+      line-height: var(--tw-leading, var(--text-3xl--line-height));
     }
   }
 

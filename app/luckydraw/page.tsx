@@ -110,7 +110,7 @@ export default function LuckyDrawPage() {
           style={{ width: "800px", height: "600px" }}
         >
           <span className="text-2xl font-semibold text-gray-700">
-            메인 이미지 영역
+            화면을 터치하여 럭키 드로우 상품을 뽑아보세요!
           </span>
         </div>
       </div>

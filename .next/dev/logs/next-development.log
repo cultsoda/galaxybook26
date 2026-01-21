@@ -182,3 +182,37 @@ For more information, see https://radix-ui.com/primitives/docs/components/dialog
 [00:30:14.132] Server  LOG      ✓ Compiled in 60ms
 [00:30:19.840] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768958809579}
 [00:30:22.488] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768958812229}
+[01:05:47.629] Server  LOG      ✓ Compiled in 390ms
+[01:05:56.641] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768960946404}
+[01:05:58.291] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768960948054}
+[01:07:47.924] Server  LOG      ✓ Compiled in 84ms
+[01:07:55.646] Server  LOG      ✓ Compiled in 52ms
+[01:08:03.268] Server  LOG      ✓ Compiled in 39ms
+[01:08:44.478] Server  LOG      ✓ Compiled in 151ms
+[01:09:06.208] Server  LOG      ✓ Compiled in 72ms
+[01:09:32.478] Server  LOG      ✓ Compiled in 76ms
+[01:10:15.565] Server  LOG      ✓ Compiled in 138ms
+[01:10:31.179] Server  LOG      ✓ Compiled in 121ms
+[01:11:06.678] Server  LOG      ✓ Compiled in 156ms
+[01:11:18.445] Server  LOG      ✓ Compiled in 102ms
+[01:12:13.145] Server  LOG      ✓ Compiled in 75ms
+[01:12:24.514] Server  LOG      ✓ Compiled in 100ms
+[01:13:42.435] Server  LOG      ✓ Compiled in 73ms
+[01:13:55.263] Server  LOG      ✓ Compiled in 98ms
+[01:14:25.839] Server  LOG      ✓ Compiled in 71ms
+[01:14:45.768] Server  LOG      ✓ Compiled in 66ms
+[01:14:53.320] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:53.458] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:14:53.458] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/storyboard","route":"/storyboard"}
+[01:14:53.458] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768961483227}
+[01:17:59.535] Server  LOG      ✓ Compiled in 138ms
+[01:18:29.644] Server  LOG      ✓ Compiled in 141ms
+[01:19:01.128] Server  LOG      ✓ Compiled in 183ms
+[01:19:11.754] Server  LOG      ✓ Compiled in 107ms
+[01:19:34.059] Server  LOG      ✓ Compiled in 141ms
+[01:19:41.699] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:19:41.844] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:19:41.844] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/storyboard","route":"/storyboard"}
+[01:19:41.844] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1768961771615}
+[01:20:26.959] Server  LOG      ✓ Compiled in 92ms
+[01:20:40.385] Server  LOG      ✓ Compiled in 63ms

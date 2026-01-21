@@ -162,19 +162,19 @@ export default function StoryboardPage() {
   if (step === "waiting") {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-6 p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-        <div className="flex flex-col items-center gap-6 w-full max-w-7xl">
-          <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border-4 border-gray-300 shadow-2xl">
+        <div className="flex flex-col items-center gap-6 w-full max-w-[95vw]">
+          <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden border-4 border-gray-300 shadow-2xl bg-gray-50 flex items-center justify-center">
             <img
               src="/storyboard/waiting-screen.png"
               alt="대기화면"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
 
           <Button
             size="lg"
             onClick={() => setStep("intro")}
-            className="h-20 px-16 text-2xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+            className="h-28 px-24 text-3xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg active:scale-95 transition-all"
           >
             시작하기
           </Button>
@@ -198,7 +198,7 @@ export default function StoryboardPage() {
           <Button
             size="lg"
             onClick={() => setStep("story")}
-            className="h-20 px-16 text-2xl bg-purple-600 hover:bg-purple-700 text-white"
+            className="h-28 px-24 text-3xl bg-purple-600 hover:bg-purple-700 text-white active:scale-95 transition-all"
           >
             퀴즈 시작
           </Button>
@@ -211,7 +211,7 @@ export default function StoryboardPage() {
   if (step === "story") {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
-        <div className="w-full max-w-7xl flex flex-col">
+        <div className="w-full max-w-[95vw] flex flex-col">
           {/* 상단 인디케이터 */}
           <div className="mb-4 text-center">
             <span className="text-xl font-semibold text-purple-700 bg-white/50 px-4 py-1 rounded-full shadow-sm">
@@ -221,8 +221,8 @@ export default function StoryboardPage() {
 
           {/* 애니메이션 영역: 고정 높이를 주어 버튼 위치를 확보합니다 */}
           <div
-            className="relative w-full mb-6"
-            style={{ perspective: "2500px", height: "calc(100vh - 240px)" }}
+            className="relative w-full mb-6 portrait:h-[calc(100vh-240px)] landscape:h-[calc(100vh-200px)]"
+            style={{ perspective: "2500px" }}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -245,24 +245,25 @@ export default function StoryboardPage() {
                   zIndex: 1,
                 }}
               >
-                <Card className="h-full p-8 bg-white shadow-2xl border-l-[12px] border-l-gray-100 flex flex-col items-center justify-between relative overflow-hidden">
+                <Card className="h-full p-6 portrait:p-6 landscape:p-4 bg-white shadow-2xl border-l-[12px] border-l-gray-100 flex flex-col items-center relative overflow-hidden">
                   {/* 왼쪽 책등 음영 효과 */}
                   <div className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
 
-                  <div className="w-full aspect-[16/9] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner">
+                  {/* 이미지 영역 - 높이 70% 차지 */}
+                  <div className="w-full flex-[7] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner bg-gray-50 flex items-center justify-center">
                     <img
                       src={`/storyboard/story-${storyIndex + 1}.jpeg`}
                       alt={`스토리 ${storyIndex + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
 
-                  <p className="text-3xl text-gray-800 font-bold text-center leading-relaxed mt-6 px-4">
-                    {storyPages[storyIndex]}
-                  </p>
-
-                  {/* 장식용 종이 질감 느낌 (선택사항) */}
-                  <div className="w-full h-1 bg-gray-50 mt-4 rounded-full" />
+                  {/* 텍스트 영역 - 높이 30% 차지 */}
+                  <div className="flex-[3] flex items-center justify-center w-full px-4">
+                    <p className="text-4xl portrait:text-4xl landscape:text-3xl text-gray-800 font-bold text-center leading-relaxed">
+                      {storyPages[storyIndex]}
+                    </p>
+                  </div>
                 </Card>
               </motion.div>
             </AnimatePresence>
@@ -274,7 +275,7 @@ export default function StoryboardPage() {
               size="lg"
               onClick={handleStoryNext}
               disabled={isFlipping}
-              className="h-20 px-16 text-2xl bg-purple-600 hover:bg-purple-700 text-white shadow-xl active:scale-95 transition-all rounded-2xl"
+              className="h-28 px-24 text-3xl bg-purple-600 hover:bg-purple-700 text-white shadow-xl active:scale-95 transition-all rounded-2xl"
             >
               {storyIndex === storyPages.length - 1
                 ? "퀴즈 풀러 가기"
@@ -312,14 +313,14 @@ export default function StoryboardPage() {
                   <Button
                     size="lg"
                     onClick={() => handleAnswer(true)}
-                    className="h-32 text-6xl font-bold bg-green-500 hover:bg-green-600 text-white rounded-2xl"
+                    className="h-44 text-7xl font-bold bg-green-500 hover:bg-green-600 text-white rounded-2xl active:scale-95 transition-all"
                   >
                     O
                   </Button>
                   <Button
                     size="lg"
                     onClick={() => handleAnswer(false)}
-                    className="h-32 text-6xl font-bold bg-red-500 hover:bg-red-600 text-white rounded-2xl"
+                    className="h-44 text-7xl font-bold bg-red-500 hover:bg-red-600 text-white rounded-2xl active:scale-95 transition-all"
                   >
                     X
                   </Button>
@@ -329,7 +330,7 @@ export default function StoryboardPage() {
                   <Button
                     variant="outline"
                     onClick={() => setShowHint(!showHint)}
-                    className="bg-transparent h-14 px-8 text-xl"
+                    className="bg-transparent h-20 px-12 text-2xl active:scale-95 transition-all"
                   >
                     {showHint ? "힌트 숨기기" : "힌트 보기"}
                   </Button>
@@ -375,7 +376,7 @@ export default function StoryboardPage() {
                   <Button
                     size="lg"
                     onClick={handleNextQuestion}
-                    className="h-20 px-16 text-2xl bg-purple-600 hover:bg-purple-700 text-white"
+                    className="h-28 px-24 text-3xl bg-purple-600 hover:bg-purple-700 text-white active:scale-95 transition-all"
                   >
                     {quizIndex < quizData.length - 1
                       ? "다음 문제"
@@ -451,7 +452,7 @@ export default function StoryboardPage() {
             <Button
               size="lg"
               onClick={resetQuiz}
-              className="h-20 px-16 text-2xl bg-blue-600 hover:bg-blue-700 text-white"
+              className="h-28 px-24 text-3xl bg-blue-600 hover:bg-blue-700 text-white active:scale-95 transition-all"
             >
               <Home className="mr-2 h-8 w-8" />
               처음으로
