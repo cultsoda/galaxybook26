@@ -173,6 +173,7 @@
     --color-red-600: #e40014;
     --color-orange-50: #fff7ed;
     --color-yellow-50: #fefce8;
+    --color-yellow-400: #fac800;
     --color-green-50: #f0fdf4;
     --color-green-100: #dcfce7;
     --color-green-500: #00c758;
@@ -189,6 +190,7 @@
     --color-purple-600: #9810fa;
     --color-purple-700: #8200da;
     --color-pink-50: #fdf2f8;
+    --color-pink-600: #e30076;
     --color-gray-50: #f9fafb;
     --color-gray-100: #f3f4f6;
     --color-gray-200: #e5e7eb;
@@ -230,6 +232,8 @@
     --text-6xl--line-height: 1;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
+    --text-8xl: 6rem;
+    --text-8xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -263,6 +267,7 @@
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-orange-50: lab(97.7008% 1.53735 5.90649);
       --color-yellow-50: lab(98.6846% -1.79055 9.7766);
+      --color-yellow-400: lab(83.2664% 8.65132 106.895);
       --color-green-50: lab(98.1563% -5.60117 2.75915);
       --color-green-100: lab(96.1861% -13.8464 6.52365);
       --color-green-500: lab(70.5521% -66.5147 45.8073);
@@ -279,6 +284,7 @@
       --color-purple-600: lab(43.0295% 75.21 -86.5669);
       --color-purple-700: lab(36.1758% 69.8525 -80.0381);
       --color-pink-50: lab(96.4459% 4.53997 -1.49434);
+      --color-pink-600: lab(49.5493% 79.8381 2.31768);
       --color-gray-50: lab(98.2596% -.247031 -.706708);
       --color-gray-100: lab(96.1596% -.0823438 -1.13575);
       --color-gray-200: lab(91.6229% -.159115 -2.26791);
@@ -698,6 +704,10 @@
     bottom: calc(var(--spacing) * 8);
   }
 
+  .bottom-32 {
+    bottom: calc(var(--spacing) * 32);
+  }
+
   .-left-12 {
     left: calc(var(--spacing) * -12);
   }
@@ -1085,6 +1095,10 @@
     height: calc(var(--spacing) * 44);
   }
 
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
+
   .h-\[1\.15rem\] {
     height: 1.15rem;
   }
@@ -1217,8 +1231,16 @@
     width: calc(var(--spacing) * 12);
   }
 
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+
   .w-20 {
     width: calc(var(--spacing) * 20);
+  }
+
+  .w-32 {
+    width: calc(var(--spacing) * 32);
   }
 
   .w-64 {
@@ -1419,6 +1441,11 @@
 
   .-translate-y-1\/2 {
     --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  .-translate-y-12 {
+    --tw-translate-y: calc(var(--spacing) * -12);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -2036,6 +2063,10 @@
     }
   }
 
+  .bg-yellow-400 {
+    background-color: var(--color-yellow-400);
+  }
+
   .bg-gradient-to-br {
     --tw-gradient-position: to bottom right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
@@ -2085,6 +2116,11 @@
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
+  .from-red-500 {
+    --tw-gradient-from: var(--color-red-500);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
   .from-yellow-50 {
     --tw-gradient-from: var(--color-yellow-50);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -2130,6 +2166,11 @@
 
   .to-pink-50 {
     --tw-gradient-to: var(--color-pink-50);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  .to-pink-600 {
+    --tw-gradient-to: var(--color-pink-600);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -2399,6 +2440,11 @@
   .text-7xl {
     font-size: var(--text-7xl);
     line-height: var(--tw-leading, var(--text-7xl--line-height));
+  }
+
+  .text-8xl {
+    font-size: var(--text-8xl);
+    line-height: var(--tw-leading, var(--text-8xl--line-height));
   }
 
   .text-base {
