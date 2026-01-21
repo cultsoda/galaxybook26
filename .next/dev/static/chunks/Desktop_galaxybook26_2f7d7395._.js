@@ -425,15 +425,6 @@ function AdminPage() {
         "AdminPage.useEffect": ()=>{
             if (isAuthenticated) {
                 loadPrizes();
-                // Load draw history from localStorage
-                const storedHistory = localStorage.getItem("intel-draw-history");
-                if (storedHistory) {
-                    try {
-                        setDrawHistory(JSON.parse(storedHistory));
-                    } catch (e) {
-                        console.error("Failed to parse history:", e);
-                    }
-                }
             }
         }
     }["AdminPage.useEffect"], [
@@ -446,6 +437,9 @@ function AdminPage() {
             const data = await response.json();
             if (data.prizes) {
                 setPrizes(data.prizes);
+            }
+            if (data.drawHistory) {
+                setDrawHistory(data.drawHistory);
             }
         } catch (error) {
             console.error("Error loading prizes:", error);
@@ -506,14 +500,33 @@ function AdminPage() {
     const cancelEdit = ()=>{
         setEditingId(null);
     };
+    // 날짜 파싱 함수
+    const parseKoreanDate = (dateStr)=>{
+        // "2026. 1. 21. 오전 10:11:35" → "2026. 1. 21."
+        const datePart = dateStr.split("오전")[0].split("오후")[0].trim();
+        return datePart;
+    };
     const historyByDate = drawHistory.reduce((acc, item)=>{
-        const date = new Date(item.date).toLocaleDateString("ko-KR");
+        const date = parseKoreanDate(item.date);
         if (!acc[date]) {
             acc[date] = [];
         }
         acc[date].push(item);
         return acc;
     }, {});
+    // 일자별 상품별 집계
+    const dailyStats = drawHistory.reduce((acc, item)=>{
+        const date = parseKoreanDate(item.date);
+        if (!acc[date]) {
+            acc[date] = {};
+        }
+        if (!acc[date][item.prizeName]) {
+            acc[date][item.prizeName] = 0;
+        }
+        acc[date][item.prizeName]++;
+        return acc;
+    }, {});
+    const sortedDates = Object.keys(dailyStats).sort((a, b)=>b.localeCompare(a));
     if (!isAuthenticated) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
             className: "min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-8",
@@ -526,12 +539,12 @@ function AdminPage() {
                             children: "관리자 로그인"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 157,
+                            lineNumber: 174,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                        lineNumber: 156,
+                        lineNumber: 173,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -547,7 +560,7 @@ function AdminPage() {
                                             children: "비밀번호"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                            lineNumber: 164,
+                                            lineNumber: 181,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -559,13 +572,13 @@ function AdminPage() {
                                             className: "h-12"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                            lineNumber: 170,
+                                            lineNumber: 187,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 180,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -574,29 +587,29 @@ function AdminPage() {
                                     children: "로그인"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                    lineNumber: 179,
+                                    lineNumber: 196,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 162,
+                            lineNumber: 179,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                        lineNumber: 161,
+                        lineNumber: 178,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                lineNumber: 155,
+                lineNumber: 172,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-            lineNumber: 154,
+            lineNumber: 171,
             columnNumber: 7
         }, this);
     }
@@ -613,7 +626,7 @@ function AdminPage() {
                             children: "관리자 페이지"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 193,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -626,7 +639,7 @@ function AdminPage() {
                                     children: loading ? "로딩 중..." : "새로고침"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 212,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -635,19 +648,19 @@ function AdminPage() {
                                     children: "메인으로 돌아가기"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                    lineNumber: 198,
+                                    lineNumber: 215,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 194,
+                            lineNumber: 211,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                    lineNumber: 192,
+                    lineNumber: 209,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -658,12 +671,12 @@ function AdminPage() {
                                 children: "상품 재고 관리"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                lineNumber: 206,
+                                lineNumber: 223,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 205,
+                            lineNumber: 222,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -677,7 +690,7 @@ function AdminPage() {
                                                     children: "상품명"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                    lineNumber: 212,
+                                                    lineNumber: 229,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -685,7 +698,7 @@ function AdminPage() {
                                                     children: "전체 수량"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                    lineNumber: 213,
+                                                    lineNumber: 230,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -693,7 +706,7 @@ function AdminPage() {
                                                     children: "남은 수량"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                    lineNumber: 214,
+                                                    lineNumber: 231,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -701,18 +714,18 @@ function AdminPage() {
                                                     children: "편집"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                    lineNumber: 215,
+                                                    lineNumber: 232,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                            lineNumber: 211,
+                                            lineNumber: 228,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                        lineNumber: 210,
+                                        lineNumber: 227,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
@@ -723,7 +736,7 @@ function AdminPage() {
                                                         children: prize.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 221,
+                                                        lineNumber: 238,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -739,12 +752,12 @@ function AdminPage() {
                                                             min: "0"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 224,
+                                                            lineNumber: 241,
                                                             columnNumber: 25
                                                         }, this) : prize.totalQty
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 222,
+                                                        lineNumber: 239,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -760,19 +773,19 @@ function AdminPage() {
                                                             min: "0"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 242,
+                                                            lineNumber: 259,
                                                             columnNumber: 25
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: prize.remainingQty === 0 ? "text-red-600 font-bold" : "",
                                                             children: prize.remainingQty
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 256,
+                                                            lineNumber: 273,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 240,
+                                                        lineNumber: 257,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -787,7 +800,7 @@ function AdminPage() {
                                                                     children: "저장"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                    lineNumber: 270,
+                                                                    lineNumber: 287,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -798,13 +811,13 @@ function AdminPage() {
                                                                     children: "취소"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                    lineNumber: 277,
+                                                                    lineNumber: 294,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 269,
+                                                            lineNumber: 286,
                                                             columnNumber: 25
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                             size: "sm",
@@ -814,40 +827,162 @@ function AdminPage() {
                                                             children: "수정"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 287,
+                                                            lineNumber: 304,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 267,
+                                                        lineNumber: 284,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, prize.id, true, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                lineNumber: 220,
+                                                lineNumber: 237,
                                                 columnNumber: 19
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                        lineNumber: 218,
+                                        lineNumber: 235,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                lineNumber: 209,
+                                lineNumber: 226,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 208,
+                            lineNumber: 225,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                    lineNumber: 204,
+                    lineNumber: 221,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardHeader"], {
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {
+                                className: "text-2xl",
+                                children: "일자별 상품 당첨 현황"
+                            }, void 0, false, {
+                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                lineNumber: 322,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                            lineNumber: 321,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
+                            children: sortedDates.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-gray-500 text-center py-8",
+                                children: "추첨 기록이 없습니다."
+                            }, void 0, false, {
+                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                lineNumber: 326,
+                                columnNumber: 15
+                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Table"], {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHeader"], {
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableRow"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
+                                                    className: "w-[120px]",
+                                                    children: "일자"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                    lineNumber: 333,
+                                                    columnNumber: 21
+                                                }, this),
+                                                prizes.map((prize)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
+                                                        className: "text-center",
+                                                        children: prize.name
+                                                    }, prize.id, false, {
+                                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                        lineNumber: 335,
+                                                        columnNumber: 23
+                                                    }, this)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
+                                                    className: "text-center font-bold",
+                                                    children: "합계"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                    lineNumber: 339,
+                                                    columnNumber: 21
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                            lineNumber: 332,
+                                            columnNumber: 19
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                        lineNumber: 331,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
+                                        children: sortedDates.map((date)=>{
+                                            const dayTotal = Object.values(dailyStats[date]).reduce((sum, count)=>sum + count, 0);
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableRow"], {
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
+                                                        className: "font-medium",
+                                                        children: date
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                        lineNumber: 352,
+                                                        columnNumber: 25
+                                                    }, this),
+                                                    prizes.map((prize)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
+                                                            className: "text-center",
+                                                            children: dailyStats[date][prize.name] || 0
+                                                        }, prize.id, false, {
+                                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                            lineNumber: 354,
+                                                            columnNumber: 27
+                                                        }, this)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
+                                                        className: "text-center font-bold",
+                                                        children: dayTotal
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                        lineNumber: 358,
+                                                        columnNumber: 25
+                                                    }, this)
+                                                ]
+                                            }, date, true, {
+                                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                                lineNumber: 351,
+                                                columnNumber: 23
+                                            }, this);
+                                        })
+                                    }, void 0, false, {
+                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                        lineNumber: 344,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                                lineNumber: 330,
+                                columnNumber: 15
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                            lineNumber: 324,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
+                    lineNumber: 320,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -858,12 +993,12 @@ function AdminPage() {
                                 children: "일별 추첨 통계"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                lineNumber: 306,
+                                lineNumber: 371,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 305,
+                            lineNumber: 370,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -872,11 +1007,11 @@ function AdminPage() {
                                 children: "추첨 기록이 없습니다."
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                lineNumber: 310,
+                                lineNumber: 375,
                                 columnNumber: 15
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "space-y-6",
-                                children: Object.entries(historyByDate).map(([date, items])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: Object.entries(historyByDate).sort(([dateA], [dateB])=>dateB.localeCompare(dateA)).map(([date, items])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "border rounded-lg p-4",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -884,8 +1019,8 @@ function AdminPage() {
                                                 children: date
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                lineNumber: 317,
-                                                columnNumber: 21
+                                                lineNumber: 384,
+                                                columnNumber: 23
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Table"], {
                                                 children: [
@@ -896,60 +1031,60 @@ function AdminPage() {
                                                                     children: "시간"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                    lineNumber: 321,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 388,
+                                                                    columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
                                                                     children: "상품명"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                    lineNumber: 322,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 389,
+                                                                    columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                            lineNumber: 320,
-                                                            columnNumber: 25
+                                                            lineNumber: 387,
+                                                            columnNumber: 27
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 319,
-                                                        columnNumber: 23
+                                                        lineNumber: 386,
+                                                        columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
                                                         children: items.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableRow"], {
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
-                                                                        children: new Date(item.date).toLocaleTimeString("ko-KR")
+                                                                        children: item.date.includes("오전") || item.date.includes("오후") ? item.date.split(". ").slice(-1)[0] : item.date
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                        lineNumber: 328,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 395,
+                                                                        columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
                                                                         children: item.prizeName
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                        lineNumber: 331,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 401,
+                                                                        columnNumber: 31
                                                                     }, this)
                                                                 ]
                                                             }, `${item.date}-${index}`, true, {
                                                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                                lineNumber: 327,
-                                                                columnNumber: 27
+                                                                lineNumber: 394,
+                                                                columnNumber: 29
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                        lineNumber: 325,
-                                                        columnNumber: 23
+                                                        lineNumber: 392,
+                                                        columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                lineNumber: 318,
-                                                columnNumber: 21
+                                                lineNumber: 385,
+                                                columnNumber: 23
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "mt-4 pt-4 border-t",
@@ -962,45 +1097,45 @@ function AdminPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                    lineNumber: 337,
-                                                    columnNumber: 23
+                                                    lineNumber: 407,
+                                                    columnNumber: 25
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                                lineNumber: 336,
-                                                columnNumber: 21
+                                                lineNumber: 406,
+                                                columnNumber: 23
                                             }, this)
                                         ]
                                     }, date, true, {
                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                        lineNumber: 316,
-                                        columnNumber: 19
+                                        lineNumber: 383,
+                                        columnNumber: 21
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                                lineNumber: 314,
+                                lineNumber: 379,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                            lineNumber: 308,
+                            lineNumber: 373,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-                    lineNumber: 304,
+                    lineNumber: 369,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-            lineNumber: 191,
+            lineNumber: 208,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/admin/page.tsx",
-        lineNumber: 190,
+        lineNumber: 207,
         columnNumber: 5
     }, this);
 }

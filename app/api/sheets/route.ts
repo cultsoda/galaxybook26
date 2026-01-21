@@ -16,18 +16,18 @@ async function getGoogleSheetsClient() {
   return google.sheets({ version: "v4", auth });
 }
 
-// GET: Sheets에서 데이터 읽기
+// GET: Sheets에서 데이터 읽기 (상품 + 당첨로그)
 export async function GET() {
   try {
     const sheets = await getGoogleSheetsClient();
 
-    const response = await sheets.spreadsheets.values.get({
+    // 상품 데이터 읽기
+    const prizesResponse = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A2:D`, // 2행부터 끝까지 (헤더 제외)
+      range: `${SHEET_NAME}!A2:D`,
     });
 
-    const rows = response.data.values || [];
-
+    const rows = prizesResponse.data.values || [];
     const prizes = rows.map((row) => ({
       id: Number(row[0]),
       name: row[1],
@@ -35,7 +35,19 @@ export async function GET() {
       remainingQty: Number(row[3]),
     }));
 
-    return NextResponse.json({ prizes });
+    // 당첨로그 읽기
+    const logResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `DrawLog!A2:B`,
+    });
+
+    const logRows = logResponse.data.values || [];
+    const drawHistory = logRows.map((row) => ({
+      date: row[0],
+      prizeName: row[1],
+    }));
+
+    return NextResponse.json({ prizes, drawHistory });
   } catch (error) {
     console.error("Error reading from Google Sheets:", error);
     return NextResponse.json({ error: "Failed to read data" }, { status: 500 });
@@ -79,9 +91,11 @@ export async function POST(request: Request) {
     const sheets = await getGoogleSheetsClient();
     const now = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
 
+    console.log("Attempting to append:", now, prizeName);
+
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: `당첨로그!A:B`,
+      range: `DrawLog!A:B`,
       valueInputOption: "RAW",
       requestBody: {
         values: [[now, prizeName]],
@@ -90,6 +104,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("POST error:", error);
     return NextResponse.json({ error: "로그 기록 실패" }, { status: 500 });
   }
 }

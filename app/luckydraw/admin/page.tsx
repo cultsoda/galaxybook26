@@ -52,16 +52,6 @@ export default function AdminPage() {
   useEffect(() => {
     if (isAuthenticated) {
       loadPrizes();
-
-      // Load draw history from localStorage
-      const storedHistory = localStorage.getItem("intel-draw-history");
-      if (storedHistory) {
-        try {
-          setDrawHistory(JSON.parse(storedHistory));
-        } catch (e) {
-          console.error("Failed to parse history:", e);
-        }
-      }
     }
   }, [isAuthenticated]);
 
@@ -72,6 +62,9 @@ export default function AdminPage() {
       const data = await response.json();
       if (data.prizes) {
         setPrizes(data.prizes);
+      }
+      if (data.drawHistory) {
+        setDrawHistory(data.drawHistory);
       }
     } catch (error) {
       console.error("Error loading prizes:", error);
@@ -140,14 +133,38 @@ export default function AdminPage() {
     setEditingId(null);
   };
 
+  // 날짜 파싱 함수
+  const parseKoreanDate = (dateStr: string) => {
+    // "2026. 1. 21. 오전 10:11:35" → "2026. 1. 21."
+    const datePart = dateStr.split("오전")[0].split("오후")[0].trim();
+    return datePart;
+  };
+
   const historyByDate = drawHistory.reduce((acc, item) => {
-    const date = new Date(item.date).toLocaleDateString("ko-KR");
+    const date = parseKoreanDate(item.date);
     if (!acc[date]) {
       acc[date] = [];
     }
     acc[date].push(item);
     return acc;
   }, {} as Record<string, DrawHistory[]>);
+
+  // 일자별 상품별 집계
+  const dailyStats = drawHistory.reduce((acc, item) => {
+    const date = parseKoreanDate(item.date);
+    if (!acc[date]) {
+      acc[date] = {};
+    }
+    if (!acc[date][item.prizeName]) {
+      acc[date][item.prizeName] = 0;
+    }
+    acc[date][item.prizeName]++;
+    return acc;
+  }, {} as Record<string, Record<string, number>>);
+
+  const sortedDates = Object.keys(dailyStats).sort((a, b) =>
+    b.localeCompare(a)
+  );
 
   if (!isAuthenticated) {
     return (
@@ -300,7 +317,55 @@ export default function AdminPage() {
             </Table>
           </CardContent>
         </Card>
-
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">일자별 상품 당첨 현황</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {sortedDates.length === 0 ? (
+              <p className="text-gray-500 text-center py-8">
+                추첨 기록이 없습니다.
+              </p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[120px]">일자</TableHead>
+                    {prizes.map((prize) => (
+                      <TableHead key={prize.id} className="text-center">
+                        {prize.name}
+                      </TableHead>
+                    ))}
+                    <TableHead className="text-center font-bold">
+                      합계
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {sortedDates.map((date) => {
+                    const dayTotal = Object.values(dailyStats[date]).reduce(
+                      (sum, count) => sum + count,
+                      0
+                    );
+                    return (
+                      <TableRow key={date}>
+                        <TableCell className="font-medium">{date}</TableCell>
+                        {prizes.map((prize) => (
+                          <TableCell key={prize.id} className="text-center">
+                            {dailyStats[date][prize.name] || 0}
+                          </TableCell>
+                        ))}
+                        <TableCell className="text-center font-bold">
+                          {dayTotal}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            )}
+          </CardContent>
+        </Card>
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">일별 추첨 통계</CardTitle>
@@ -312,32 +377,39 @@ export default function AdminPage() {
               </p>
             ) : (
               <div className="space-y-6">
-                {Object.entries(historyByDate).map(([date, items]) => (
-                  <div key={date} className="border rounded-lg p-4">
-                    <h3 className="font-bold text-lg mb-4">{date}</h3>
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>시간</TableHead>
-                          <TableHead>상품명</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {items.map((item, index) => (
-                          <TableRow key={`${item.date}-${index}`}>
-                            <TableCell>
-                              {new Date(item.date).toLocaleTimeString("ko-KR")}
-                            </TableCell>
-                            <TableCell>{item.prizeName}</TableCell>
+                {Object.entries(historyByDate)
+                  .sort(([dateA], [dateB]) => dateB.localeCompare(dateA))
+                  .map(([date, items]) => (
+                    <div key={date} className="border rounded-lg p-4">
+                      <h3 className="font-bold text-lg mb-4">{date}</h3>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>시간</TableHead>
+                            <TableHead>상품명</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                    <div className="mt-4 pt-4 border-t">
-                      <p className="font-semibold">총 {items.length}회 추첨</p>
+                        </TableHeader>
+                        <TableBody>
+                          {items.map((item, index) => (
+                            <TableRow key={`${item.date}-${index}`}>
+                              <TableCell>
+                                {item.date.includes("오전") ||
+                                item.date.includes("오후")
+                                  ? item.date.split(". ").slice(-1)[0]
+                                  : item.date}
+                              </TableCell>
+                              <TableCell>{item.prizeName}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                      <div className="mt-4 pt-4 border-t">
+                        <p className="font-semibold">
+                          총 {items.length}회 추첨
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </CardContent>

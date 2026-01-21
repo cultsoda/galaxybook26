@@ -267,102 +267,85 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$n
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/components/ui/button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/components/ui/dialog.tsx [app-ssr] (ecmascript)");
-'use client';
+"use client";
 ;
 ;
 ;
 ;
 ;
-const initialPrizes = [
-    {
-        id: 1,
-        name: '무선 마우스',
-        totalQty: 10,
-        remainingQty: 8
-    },
-    {
-        id: 2,
-        name: 'USB 메모리',
-        totalQty: 15,
-        remainingQty: 12
-    },
-    {
-        id: 3,
-        name: '노트북 파우치',
-        totalQty: 20,
-        remainingQty: 18
-    },
-    {
-        id: 4,
-        name: '인텔 스티커팩',
-        totalQty: 30,
-        remainingQty: 25
-    },
-    {
-        id: 5,
-        name: '에코백',
-        totalQty: 25,
-        remainingQty: 20
-    },
-    {
-        id: 6,
-        name: '텀블러',
-        totalQty: 12,
-        remainingQty: 10
-    },
-    {
-        id: 7,
-        name: '무선 충전기',
-        totalQty: 8,
-        remainingQty: 6
-    }
-];
 function LuckyDrawPage() {
-    const [prizes, setPrizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialPrizes);
+    const [prizes, setPrizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedPrize, setSelectedPrize] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isModalOpen, setIsModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Load prizes from localStorage on mount
+    // Load prizes from Google Sheets
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const stored = localStorage.getItem('intel-prizes');
-        if (stored) {
+        const loadPrizesFromAPI = async ()=>{
             try {
-                setPrizes(JSON.parse(stored));
-            } catch (e) {
-                console.error('[v0] Failed to parse prizes from localStorage:', e);
+                const response = await fetch("/api/sheets");
+                const data = await response.json();
+                if (data.prizes) {
+                    setPrizes(data.prizes);
+                }
+            } catch (error) {
+                console.error("Failed to load prizes:", error);
             }
-        }
+        };
+        loadPrizesFromAPI();
     }, []);
     // Save prizes to localStorage whenever they change
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        localStorage.setItem('intel-prizes', JSON.stringify(prizes));
-    }, [
-        prizes
-    ]);
-    const drawPrize = ()=>{
-        // Filter prizes with remaining quantity > 0
+    const drawPrize = async ()=>{
         const availablePrizes = prizes.filter((p)=>p.remainingQty > 0);
         if (availablePrizes.length === 0) {
-            alert('모든 상품이 소진되었습니다!');
+            alert("모든 상품이 소진되었습니다!");
             return;
         }
-        // Random selection with equal probability
         const randomIndex = Math.floor(Math.random() * availablePrizes.length);
         const drawnPrize = availablePrizes[randomIndex];
-        // Update remaining quantity
-        setPrizes((prev)=>prev.map((p)=>p.id === drawnPrize.id ? {
-                    ...p,
-                    remainingQty: p.remainingQty - 1
-                } : p));
-        // Record draw history
-        const history = JSON.parse(localStorage.getItem('intel-draw-history') || '[]');
-        history.push({
-            date: new Date().toISOString(),
-            prizeName: drawnPrize.name,
-            prizeId: drawnPrize.id
-        });
-        localStorage.setItem('intel-draw-history', JSON.stringify(history));
-        setSelectedPrize(drawnPrize);
-        setIsModalOpen(true);
+        // Update prizes array
+        const updatedPrizes = prizes.map((p)=>p.id === drawnPrize.id ? {
+                ...p,
+                remainingQty: p.remainingQty - 1
+            } : p);
+        try {
+            // Save to Google Sheets
+            const response = await fetch("/api/sheets", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    prizes: updatedPrizes
+                })
+            });
+            if (response.ok) {
+                setPrizes(updatedPrizes);
+                // Record draw history to localStorage
+                const history = JSON.parse(localStorage.getItem("intel-draw-history") || "[]");
+                history.push({
+                    date: new Date().toISOString(),
+                    prizeName: drawnPrize.name,
+                    prizeId: drawnPrize.id
+                });
+                localStorage.setItem("intel-draw-history", JSON.stringify(history));
+                // Record to Google Sheets 당첨로그
+                await fetch("/api/sheets", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        prizeName: drawnPrize.name
+                    })
+                });
+                setSelectedPrize(drawnPrize);
+                setIsModalOpen(true);
+            } else {
+                alert("상품 수량 업데이트에 실패했습니다.");
+            }
+        } catch (error) {
+            console.error("Error updating prize:", error);
+            alert("업데이트 중 오류가 발생했습니다.");
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "min-h-screen relative bg-gradient-to-br from-blue-600 to-indigo-700",
@@ -379,7 +362,7 @@ function LuckyDrawPage() {
                                 children: "럭키드로우"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 88,
+                                lineNumber: 103,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -387,38 +370,38 @@ function LuckyDrawPage() {
                                 children: "화면을 터치하여 추첨하세요"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 89,
+                                lineNumber: 104,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 87,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "bg-gray-400 rounded-lg shadow-2xl flex items-center justify-center",
                         style: {
-                            width: '800px',
-                            height: '600px'
+                            width: "800px",
+                            height: "600px"
                         },
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             className: "text-2xl font-semibold text-gray-700",
                             children: "메인 이미지 영역"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 94,
+                            lineNumber: 112,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 93,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                lineNumber: 83,
+                lineNumber: 98,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -440,7 +423,7 @@ function LuckyDrawPage() {
                                 d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 106,
+                                lineNumber: 131,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -450,23 +433,23 @@ function LuckyDrawPage() {
                                 d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 107,
+                                lineNumber: 137,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 105,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                    lineNumber: 104,
+                    lineNumber: 124,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                lineNumber: 99,
+                lineNumber: 119,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -483,26 +466,26 @@ function LuckyDrawPage() {
                                     children: "축하합니다!"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 116,
+                                    lineNumber: 151,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "bg-gray-300 rounded-lg mb-6 flex items-center justify-center",
                                     style: {
-                                        width: '400px',
-                                        height: '300px'
+                                        width: "400px",
+                                        height: "300px"
                                     },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-lg font-medium text-gray-600",
                                         children: "상품 이미지"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                        lineNumber: 120,
+                                        lineNumber: 160,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 156,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -510,7 +493,7 @@ function LuckyDrawPage() {
                                     children: selectedPrize?.name
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 123,
+                                    lineNumber: 165,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -518,13 +501,13 @@ function LuckyDrawPage() {
                                     children: "당첨되었습니다!"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 168,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 115,
+                            lineNumber: 150,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -534,29 +517,29 @@ function LuckyDrawPage() {
                                 children: "확인"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 128,
+                                lineNumber: 172,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 127,
+                            lineNumber: 171,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                    lineNumber: 114,
+                    lineNumber: 149,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                lineNumber: 113,
+                lineNumber: 148,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-        lineNumber: 81,
+        lineNumber: 96,
         columnNumber: 5
     }, this);
 }

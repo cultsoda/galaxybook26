@@ -121,10 +121,9 @@
     --container-sm: 24rem;
     --container-md: 28rem;
     --container-lg: 32rem;
-    --container-2xl: 42rem;
-    --container-3xl: 48rem;
     --container-4xl: 56rem;
     --container-6xl: 72rem;
+    --container-7xl: 80rem;
     --text-xs: .75rem;
     --text-xs--line-height: calc(1 / .75);
     --text-sm: .875rem;
@@ -729,8 +728,8 @@
     margin-top: calc(var(--spacing) * 4);
   }
 
-  .mt-8 {
-    margin-top: calc(var(--spacing) * 8);
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
   }
 
   .mt-auto {
@@ -759,6 +758,10 @@
 
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
+  }
+
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
   }
 
   .mb-12 {
@@ -839,12 +842,8 @@
     field-sizing: content;
   }
 
-  .aspect-\[3\/2\] {
-    aspect-ratio: 3 / 2;
-  }
-
-  .aspect-\[4\/3\] {
-    aspect-ratio: 4 / 3;
+  .aspect-\[16\/9\] {
+    aspect-ratio: 16 / 9;
   }
 
   .aspect-square {
@@ -972,6 +971,10 @@
     height: calc(var(--spacing) * 12);
   }
 
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
+
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
@@ -984,12 +987,12 @@
     height: calc(var(--spacing) * 24);
   }
 
-  .h-\[1\.15rem\] {
-    height: 1.15rem;
+  .h-32 {
+    height: calc(var(--spacing) * 32);
   }
 
-  .h-\[600px\] {
-    height: 600px;
+  .h-\[1\.15rem\] {
+    height: 1.15rem;
   }
 
   .h-\[calc\(100\%-1px\)\] {
@@ -1112,6 +1115,10 @@
     width: calc(var(--spacing) * 9);
   }
 
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
@@ -1130,6 +1137,10 @@
 
   .w-\[100px\] {
     width: 100px;
+  }
+
+  .w-\[120px\] {
+    width: 120px;
   }
 
   .w-\[200px\] {
@@ -1160,20 +1171,16 @@
     max-width: var(--skeleton-width);
   }
 
-  .max-w-2xl {
-    max-width: var(--container-2xl);
-  }
-
-  .max-w-3xl {
-    max-width: var(--container-3xl);
-  }
-
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
 
   .max-w-6xl {
     max-width: var(--container-6xl);
+  }
+
+  .max-w-7xl {
+    max-width: var(--container-7xl);
   }
 
   .max-w-\[calc\(100\%-2rem\)\] {
@@ -2082,6 +2089,10 @@
     padding: calc(var(--spacing) * 12);
   }
 
+  .p-14 {
+    padding: calc(var(--spacing) * 14);
+  }
+
   .p-\[3px\] {
     padding: 3px;
   }
@@ -2122,8 +2133,8 @@
     padding-inline: calc(var(--spacing) * 6);
   }
 
-  .px-12 {
-    padding-inline: calc(var(--spacing) * 12);
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
   }
 
   .px-16 {

@@ -1,86 +1,101 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
 
 interface Prize {
-  id: number
-  name: string
-  totalQty: number
-  remainingQty: number
+  id: number;
+  name: string;
+  totalQty: number;
+  remainingQty: number;
 }
 
-const initialPrizes: Prize[] = [
-  { id: 1, name: '무선 마우스', totalQty: 10, remainingQty: 8 },
-  { id: 2, name: 'USB 메모리', totalQty: 15, remainingQty: 12 },
-  { id: 3, name: '노트북 파우치', totalQty: 20, remainingQty: 18 },
-  { id: 4, name: '인텔 스티커팩', totalQty: 30, remainingQty: 25 },
-  { id: 5, name: '에코백', totalQty: 25, remainingQty: 20 },
-  { id: 6, name: '텀블러', totalQty: 12, remainingQty: 10 },
-  { id: 7, name: '무선 충전기', totalQty: 8, remainingQty: 6 },
-]
-
 export default function LuckyDrawPage() {
-  const [prizes, setPrizes] = useState<Prize[]>(initialPrizes)
-  const [selectedPrize, setSelectedPrize] = useState<Prize | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [prizes, setPrizes] = useState<Prize[]>([]);
+  const [selectedPrize, setSelectedPrize] = useState<Prize | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Load prizes from localStorage on mount
+  // Load prizes from Google Sheets
   useEffect(() => {
-    const stored = localStorage.getItem('intel-prizes')
-    if (stored) {
+    const loadPrizesFromAPI = async () => {
       try {
-        setPrizes(JSON.parse(stored))
-      } catch (e) {
-        console.error('[v0] Failed to parse prizes from localStorage:', e)
+        const response = await fetch("/api/sheets");
+        const data = await response.json();
+        if (data.prizes) {
+          setPrizes(data.prizes);
+        }
+      } catch (error) {
+        console.error("Failed to load prizes:", error);
       }
-    }
-  }, [])
+    };
+
+    loadPrizesFromAPI();
+  }, []);
 
   // Save prizes to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('intel-prizes', JSON.stringify(prizes))
-  }, [prizes])
 
-  const drawPrize = () => {
-    // Filter prizes with remaining quantity > 0
-    const availablePrizes = prizes.filter(p => p.remainingQty > 0)
-    
+  const drawPrize = async () => {
+    const availablePrizes = prizes.filter((p) => p.remainingQty > 0);
+
     if (availablePrizes.length === 0) {
-      alert('모든 상품이 소진되었습니다!')
-      return
+      alert("모든 상품이 소진되었습니다!");
+      return;
     }
 
-    // Random selection with equal probability
-    const randomIndex = Math.floor(Math.random() * availablePrizes.length)
-    const drawnPrize = availablePrizes[randomIndex]
+    const randomIndex = Math.floor(Math.random() * availablePrizes.length);
+    const drawnPrize = availablePrizes[randomIndex];
 
-    // Update remaining quantity
-    setPrizes(prev => prev.map(p => 
-      p.id === drawnPrize.id 
-        ? { ...p, remainingQty: p.remainingQty - 1 }
-        : p
-    ))
+    // Update prizes array
+    const updatedPrizes = prizes.map((p) =>
+      p.id === drawnPrize.id ? { ...p, remainingQty: p.remainingQty - 1 } : p
+    );
 
-    // Record draw history
-    const history = JSON.parse(localStorage.getItem('intel-draw-history') || '[]')
-    history.push({
-      date: new Date().toISOString(),
-      prizeName: drawnPrize.name,
-      prizeId: drawnPrize.id,
-    })
-    localStorage.setItem('intel-draw-history', JSON.stringify(history))
+    try {
+      // Save to Google Sheets
+      const response = await fetch("/api/sheets", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prizes: updatedPrizes }),
+      });
 
-    setSelectedPrize(drawnPrize)
-    setIsModalOpen(true)
-  }
+      if (response.ok) {
+        setPrizes(updatedPrizes);
+
+        // Record draw history to localStorage
+        const history = JSON.parse(
+          localStorage.getItem("intel-draw-history") || "[]"
+        );
+        history.push({
+          date: new Date().toISOString(),
+          prizeName: drawnPrize.name,
+          prizeId: drawnPrize.id,
+        });
+        localStorage.setItem("intel-draw-history", JSON.stringify(history));
+
+        // Record to Google Sheets 당첨로그
+        await fetch("/api/sheets", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prizeName: drawnPrize.name }),
+        });
+
+        setSelectedPrize(drawnPrize);
+        setIsModalOpen(true);
+      } else {
+        alert("상품 수량 업데이트에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error updating prize:", error);
+      alert("업데이트 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <main className="min-h-screen relative bg-gradient-to-br from-blue-600 to-indigo-700">
       {/* Touch area */}
-      <div 
+      <div
         className="min-h-screen flex flex-col items-center justify-center p-8 cursor-pointer select-none active:scale-[0.99] transition-transform"
         onClick={drawPrize}
       >
@@ -90,21 +105,41 @@ export default function LuckyDrawPage() {
         </div>
 
         {/* Main image placeholder */}
-        <div className="bg-gray-400 rounded-lg shadow-2xl flex items-center justify-center" style={{ width: '800px', height: '600px' }}>
-          <span className="text-2xl font-semibold text-gray-700">메인 이미지 영역</span>
+        <div
+          className="bg-gray-400 rounded-lg shadow-2xl flex items-center justify-center"
+          style={{ width: "800px", height: "600px" }}
+        >
+          <span className="text-2xl font-semibold text-gray-700">
+            메인 이미지 영역
+          </span>
         </div>
       </div>
 
       {/* Admin badge in bottom-right corner */}
-      <Link 
+      <Link
         href="/luckydraw/admin"
         className="fixed bottom-8 right-8 opacity-30 hover:opacity-100 transition-opacity"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg">
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <svg
+            className="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
           </svg>
         </div>
       </Link>
@@ -113,19 +148,28 @@ export default function LuckyDrawPage() {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-md backdrop-blur-sm bg-white/95">
           <div className="flex flex-col items-center py-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">축하합니다!</h2>
-            
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              축하합니다!
+            </h2>
+
             {/* Prize image placeholder */}
-            <div className="bg-gray-300 rounded-lg mb-6 flex items-center justify-center" style={{ width: '400px', height: '300px' }}>
-              <span className="text-lg font-medium text-gray-600">상품 이미지</span>
+            <div
+              className="bg-gray-300 rounded-lg mb-6 flex items-center justify-center"
+              style={{ width: "400px", height: "300px" }}
+            >
+              <span className="text-lg font-medium text-gray-600">
+                상품 이미지
+              </span>
             </div>
 
-            <p className="text-4xl font-bold text-blue-600 mb-2">{selectedPrize?.name}</p>
+            <p className="text-4xl font-bold text-blue-600 mb-2">
+              {selectedPrize?.name}
+            </p>
             <p className="text-lg text-gray-600">당첨되었습니다!</p>
           </div>
-          
+
           <DialogFooter>
-            <Button 
+            <Button
               onClick={() => setIsModalOpen(false)}
               className="w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700"
             >
@@ -135,5 +179,5 @@ export default function LuckyDrawPage() {
         </DialogContent>
       </Dialog>
     </main>
-  )
+  );
 }

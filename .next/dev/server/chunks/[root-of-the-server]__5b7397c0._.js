@@ -166,19 +166,31 @@ async function getGoogleSheetsClient() {
 async function GET() {
     try {
         const sheets = await getGoogleSheetsClient();
-        const response = await sheets.spreadsheets.values.get({
+        // 상품 데이터 읽기
+        const prizesResponse = await sheets.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
             range: `${SHEET_NAME}!A2:D`
         });
-        const rows = response.data.values || [];
+        const rows = prizesResponse.data.values || [];
         const prizes = rows.map((row)=>({
                 id: Number(row[0]),
                 name: row[1],
                 totalQty: Number(row[2]),
                 remainingQty: Number(row[3])
             }));
+        // 당첨로그 읽기
+        const logResponse = await sheets.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID,
+            range: `DrawLog!A2:B`
+        });
+        const logRows = logResponse.data.values || [];
+        const drawHistory = logRows.map((row)=>({
+                date: row[0],
+                prizeName: row[1]
+            }));
         return __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            prizes
+            prizes,
+            drawHistory
         });
     } catch (error) {
         console.error("Error reading from Google Sheets:", error);
@@ -226,9 +238,10 @@ async function POST(request) {
         const now = new Date().toLocaleString("ko-KR", {
             timeZone: "Asia/Seoul"
         });
+        console.log("Attempting to append:", now, prizeName);
         await sheets.spreadsheets.values.append({
             spreadsheetId: SPREADSHEET_ID,
-            range: `당첨로그!A:B`,
+            range: `DrawLog!A:B`,
             valueInputOption: "RAW",
             requestBody: {
                 values: [
@@ -243,6 +256,7 @@ async function POST(request) {
             success: true
         });
     } catch (error) {
+        console.error("POST error:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: "로그 기록 실패"
         }, {
