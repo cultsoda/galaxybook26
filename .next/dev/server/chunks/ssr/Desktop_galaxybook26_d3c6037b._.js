@@ -361,7 +361,7 @@ function LuckyDrawPage() {
                     setIsAnimating(false);
                     setSelectedPrize(drawnPrize);
                     setIsModalOpen(true);
-                }, 3000);
+                }, 1500);
             } else {
                 setIsAnimating(false);
                 alert("상품 수량 업데이트에 실패했습니다.");
