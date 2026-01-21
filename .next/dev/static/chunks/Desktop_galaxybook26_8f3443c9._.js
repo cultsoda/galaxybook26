@@ -570,7 +570,7 @@ function StoryboardPage() {
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "w-full flex-[7] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner bg-gray-50 flex items-center justify-center",
+                                            className: "w-full flex-[7] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                 src: `/storyboard/story-${storyIndex + 1}.jpeg`,
                                                 alt: `스토리 ${storyIndex + 1}`,
@@ -588,7 +588,7 @@ function StoryboardPage() {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex-[3] flex items-center justify-center w-full px-4",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-4xl portrait:text-4xl landscape:text-3xl text-gray-800 font-bold text-center leading-relaxed",
+                                                className: "text-6xl portrait:text-4xl landscape:text-5xl text-gray-800 font-bold text-center leading-relaxed",
                                                 children: storyPages[storyIndex]
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/galaxybook26/app/storyboard/page.tsx",

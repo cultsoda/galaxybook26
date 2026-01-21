@@ -250,7 +250,7 @@ export default function StoryboardPage() {
                   <div className="absolute top-0 left-0 w-6 h-full bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
 
                   {/* 이미지 영역 - 높이 70% 차지 */}
-                  <div className="w-full flex-[7] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner bg-gray-50 flex items-center justify-center">
+                  <div className="w-full flex-[7] rounded-xl overflow-hidden border-4 border-gray-200 shadow-inner">
                     <img
                       src={`/storyboard/story-${storyIndex + 1}.jpeg`}
                       alt={`스토리 ${storyIndex + 1}`}
@@ -260,7 +260,7 @@ export default function StoryboardPage() {
 
                   {/* 텍스트 영역 - 높이 30% 차지 */}
                   <div className="flex-[3] flex items-center justify-center w-full px-4">
-                    <p className="text-4xl portrait:text-4xl landscape:text-3xl text-gray-800 font-bold text-center leading-relaxed">
+                    <p className="text-6xl portrait:text-4xl landscape:text-5xl text-gray-800 font-bold text-center leading-relaxed">
                       {storyPages[storyIndex]}
                     </p>
                   </div>

@@ -4898,6 +4898,13 @@
     }
   }
 
+  @media (orientation: landscape) {
+    .landscape\:text-5xl {
+      font-size: var(--text-5xl);
+      line-height: var(--tw-leading, var(--text-5xl--line-height));
+    }
+  }
+
   .dark\:border-input:is(.dark *) {
     border-color: var(--input);
   }
