@@ -300,6 +300,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$n
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/components/ui/dialog.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$gift$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Gift$3e$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/lucide-react/dist/esm/icons/gift.js [app-client] (ecmascript) <export default as Gift>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/lucide-react/dist/esm/icons/sparkles.js [app-client] (ecmascript) <export default as Sparkles>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trophy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trophy$3e$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/lucide-react/dist/esm/icons/trophy.js [app-client] (ecmascript) <export default as Trophy>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$settings$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Settings$3e$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/lucide-react/dist/esm/icons/settings.js [app-client] (ecmascript) <export default as Settings>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/galaxybook26/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -307,30 +313,15 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const shakeAnimation = `
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    10% { transform: rotate(-5deg) scale(1.05); }
-    20% { transform: rotate(5deg) scale(0.95); }
-    30% { transform: rotate(-5deg) scale(1.05); }
-    40% { transform: rotate(5deg) scale(0.95); }
-    50% { transform: rotate(-3deg) scale(1.02); }
-    60% { transform: rotate(3deg) scale(0.98); }
-    70% { transform: rotate(-3deg) scale(1.02); }
-    80% { transform: rotate(3deg) scale(0.98); }
-    90% { transform: rotate(-1deg) scale(1.01); }
-  }
-  .animate-shake {
-    animation: shake 0.5s ease-in-out infinite;
-  }
-`;
+;
+;
 function LuckyDrawPage() {
     _s();
     const [prizes, setPrizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedPrize, setSelectedPrize] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isModalOpen, setIsModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true); // 이 줄 추가
-    const [isAnimating, setIsAnimating] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false); // 이 줄 추가
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [isAnimating, setIsAnimating] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // Load prizes from Google Sheets
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "LuckyDrawPage.useEffect": ()=>{
@@ -341,25 +332,24 @@ function LuckyDrawPage() {
                         const data = await response.json();
                         if (data.prizes) {
                             setPrizes(data.prizes);
-                            setIsLoading(false); // 이 줄 추가
+                            setIsLoading(false);
                         }
                     } catch (error) {
                         console.error("Failed to load prizes:", error);
+                        setIsLoading(false); // 로드 실패 시에도 로딩 상태 해제
                     }
                 }
             }["LuckyDrawPage.useEffect.loadPrizesFromAPI"];
             loadPrizesFromAPI();
         }
     }["LuckyDrawPage.useEffect"], []);
-    // Save prizes to localStorage whenever they change
     const drawPrize = async ()=>{
-        if (isLoading || isAnimating) return; // isAnimating 추가
+        if (isLoading || isAnimating) return;
         const availablePrizes = prizes.filter((p)=>p.remainingQty > 0);
         if (availablePrizes.length === 0) {
             alert("모든 상품이 소진되었습니다!");
             return;
         }
-        // 애니메이션 시작
         setIsAnimating(true);
         const randomIndex = Math.floor(Math.random() * availablePrizes.length);
         const drawnPrize = availablePrizes[randomIndex];
@@ -395,12 +385,12 @@ function LuckyDrawPage() {
                         prizeName: drawnPrize.name
                     })
                 });
-                // 3초 후 애니메이션 종료 + 결과 표시
+                // 애니메이션 종료 및 결과 표시 지연
                 setTimeout(()=>{
                     setIsAnimating(false);
                     setSelectedPrize(drawnPrize);
                     setIsModalOpen(true);
-                }, 1500);
+                }, 2500); // 회전 애니메이션을 충분히 보여주기 위해 시간 조정 (1.8s -> 2.5s)
             } else {
                 setIsAnimating(false);
                 alert("상품 수량 업데이트에 실패했습니다.");
@@ -411,267 +401,419 @@ function LuckyDrawPage() {
             alert("업데이트 중 오류가 발생했습니다.");
         }
     };
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+        className: "min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#0a0f1c] to-black text-white",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("style", {
-                children: shakeAnimation
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-600/20 blur-[100px]"
             }, void 0, false, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                lineNumber: 125,
+                lineNumber: 108,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-                className: "min-h-screen relative bg-gradient-to-br from-blue-600 to-indigo-700",
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-600/20 blur-[100px]"
+            }, void 0, false, {
+                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                lineNumber: 109,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "relative z-10 flex flex-col items-center justify-center w-full h-full text-center cursor-pointer select-none",
+                onClick: drawPrize,
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "min-h-screen flex flex-col items-center justify-center p-8 cursor-pointer select-none active:scale-[0.99] transition-transform",
-                        onClick: drawPrize,
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                        initial: {
+                            opacity: 0,
+                            y: -20
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 0.5
+                        },
+                        className: "mb-10",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "text-center mb-12",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                        className: "text-6xl font-bold text-white mb-4",
-                                        children: "럭키드로우"
-                                    }, void 0, false, {
-                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                        lineNumber: 133,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-2xl text-blue-100",
-                                        children: "화면을 터치하여 추첨하세요"
-                                    }, void 0, false, {
-                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                        lineNumber: 134,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 132,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "bg-gray-400 rounded-lg shadow-2xl flex items-center justify-center",
-                                style: {
-                                    width: "800px",
-                                    height: "600px"
-                                },
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "text-2xl font-semibold text-gray-700",
-                                    children: "화면을 터치하여 럭키 드로우 상품을 뽑아보세요!"
-                                }, void 0, false, {
-                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 142,
-                                    columnNumber: 13
-                                }, this)
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                                className: "text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-tight drop-shadow-lg mb-4",
+                                children: "Galaxy Lucky Draw"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 138,
+                                lineNumber: 121,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-xl md:text-2xl text-blue-300 font-light tracking-wide",
+                                children: "화면을 터치하여 행운을 시험해보세요!"
+                            }, void 0, false, {
+                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                lineNumber: 124,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 128,
+                        lineNumber: 115,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        href: "/luckydraw/admin",
-                        className: "fixed bottom-8 right-8 opacity-30 hover:opacity-100 transition-opacity",
-                        onClick: (e)=>e.stopPropagation(),
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "w-6 h-6 text-white",
-                                fill: "none",
-                                stroke: "currentColor",
-                                viewBox: "0 0 24 24",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                        strokeLinecap: "round",
-                                        strokeLinejoin: "round",
-                                        strokeWidth: 2,
-                                        d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                                    }, void 0, false, {
-                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                        lineNumber: 161,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                        strokeLinecap: "round",
-                                        strokeLinejoin: "round",
-                                        strokeWidth: 2,
-                                        d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "relative w-72 h-72 md:w-96 md:h-96 perspective-[1000px]",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                            animate: isAnimating ? {
+                                rotateX: [
+                                    0,
+                                    360,
+                                    720,
+                                    1080
+                                ],
+                                rotateY: [
+                                    0,
+                                    360,
+                                    720,
+                                    1080
+                                ],
+                                scale: [
+                                    1,
+                                    0.8,
+                                    1.1,
+                                    1
+                                ]
+                            } : {
+                                rotateX: 0,
+                                rotateY: 0,
+                                scale: 1
+                            },
+                            transition: isAnimating ? {
+                                duration: 2.5,
+                                ease: "easeInOut",
+                                times: [
+                                    0,
+                                    0.4,
+                                    0.8,
+                                    1
+                                ]
+                            } : {
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 20
+                            },
+                            className: `w-full h-full bg-gradient-to-br from-blue-700 to-purple-900 rounded-3xl shadow-2xl flex items-center justify-center border-4 border-blue-400/50 backdrop-blur-sm relative overflow-hidden ${!isAnimating ? "hover:scale-105 active:scale-95 transition-transform" : ""}`,
+                            style: {
+                                transformStyle: "preserve-3d",
+                                boxShadow: isAnimating ? "0 0 100px 20px rgba(59, 130, 246, 0.8), inset 0 0 50px rgba(168, 85, 247, 0.5)" : "0 0 30px rgba(0,0,0,0.5)"
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                                    children: isAnimating && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                        initial: {
+                                            opacity: 0
+                                        },
+                                        animate: {
+                                            opacity: [
+                                                0,
+                                                0.8,
+                                                0
+                                            ]
+                                        },
+                                        transition: {
+                                            duration: 2.5,
+                                            times: [
+                                                0,
+                                                0.5,
+                                                1
+                                            ],
+                                            repeat: 0
+                                        },
+                                        className: "absolute inset-0 bg-white z-20 mix-blend-overlay"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
                                         lineNumber: 167,
-                                        columnNumber: 15
+                                        columnNumber: 17
                                     }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 155,
-                                columnNumber: 13
-                            }, this)
-                        }, void 0, false, {
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 165,
+                                    columnNumber: 14
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                                    mode: "wait",
+                                    children: !isAnimating ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                        initial: {
+                                            scale: 0.5,
+                                            opacity: 0
+                                        },
+                                        animate: {
+                                            scale: 1,
+                                            opacity: 1
+                                        },
+                                        exit: {
+                                            scale: 0.5,
+                                            opacity: 0,
+                                            rotate: 180
+                                        },
+                                        transition: {
+                                            duration: 0.3
+                                        },
+                                        className: "absolute flex flex-col items-center justify-center z-10",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$gift$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Gift$3e$__["Gift"], {
+                                                className: "w-32 h-32 text-blue-200 drop-shadow-[0_0_15px_rgba(191,219,254,0.5)]"
+                                            }, void 0, false, {
+                                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                                lineNumber: 186,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
+                                                className: "absolute -top-4 -right-4 w-12 h-12 text-yellow-300 animate-pulse"
+                                            }, void 0, false, {
+                                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                                lineNumber: 187,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, "gift-icon", true, {
+                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                        lineNumber: 178,
+                                        columnNumber: 17
+                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                        initial: {
+                                            opacity: 0,
+                                            scale: 0.5
+                                        },
+                                        animate: {
+                                            opacity: 1,
+                                            scale: 1.2
+                                        },
+                                        exit: {
+                                            opacity: 0
+                                        },
+                                        transition: {
+                                            duration: 0.5,
+                                            repeat: Infinity,
+                                            repeatType: "reverse"
+                                        },
+                                        className: "absolute z-10 text-center",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]",
+                                            children: "?"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                            lineNumber: 198,
+                                            columnNumber: 20
+                                        }, this)
+                                    }, "drawing-text", false, {
+                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                        lineNumber: 190,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 176,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-20 bg-center bg-cover pointer-events-none mix-blend-overlay"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 206,
+                                    columnNumber: 14
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 154,
+                            lineNumber: 131,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 149,
+                        lineNumber: 130,
                         columnNumber: 9
                     }, this),
-                    isAnimating && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "fixed inset-0 bg-black/50 flex items-center justify-center z-50",
+                    !isAnimating && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].p, {
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1
+                        },
+                        transition: {
+                            delay: 0.5,
+                            duration: 0.5
+                        },
+                        className: "mt-10 text-2xl text-blue-200 animate-pulse",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "animate-shake",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-64 h-64 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl shadow-2xl flex items-center justify-center relative",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "absolute top-0 left-1/2 -translate-x-1/2 w-16 h-32 bg-yellow-400 -translate-y-12"
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 182,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "absolute top-0 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-400"
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 183,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-8xl text-white font-bold",
-                                            children: "?"
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 186,
-                                            columnNumber: 17
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "relative inline-flex h-3 w-3 rounded-full bg-blue-400 mr-3",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
+                                }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 219,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 179,
+                                lineNumber: 218,
                                 columnNumber: 13
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "absolute bottom-32 text-2xl text-white font-bold",
-                                children: "추첨 중..."
-                            }, void 0, false, {
-                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 189,
-                                columnNumber: 13
-                            }, this)
+                            "화면 어디든 터치하세요!"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 178,
+                        lineNumber: 212,
                         columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
-                        open: isModalOpen,
-                        onOpenChange: setIsModalOpen,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
-                            className: "sm:max-w-md backdrop-blur-sm bg-white/95",
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                lineNumber: 111,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                href: "/luckydraw/admin",
+                className: "fixed bottom-8 right-8 p-3 bg-white/10 backdrop-blur-md rounded-full opacity-60 hover:opacity-100 transition-opacity duration-300 shadow-lg group",
+                onClick: (e)=>e.stopPropagation(),
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$settings$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Settings$3e$__["Settings"], {
+                    className: "w-7 h-7 text-gray-300 group-hover:rotate-90 transition-transform duration-300"
+                }, void 0, false, {
+                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                    lineNumber: 232,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                lineNumber: 227,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
+                open: isModalOpen,
+                onOpenChange: setIsModalOpen,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                    className: "sm:max-w-md p-8 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-2xl",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
+                            className: "flex flex-col items-center",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex flex-col items-center py-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "text-3xl font-bold text-gray-900 mb-6",
-                                            children: "축하합니다!"
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 199,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-gray-300 rounded-lg mb-6 flex items-center justify-center",
-                                            style: {
-                                                width: "400px",
-                                                height: "300px"
-                                            },
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-lg font-medium text-gray-600",
-                                                children: "상품 이미지"
-                                            }, void 0, false, {
-                                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                                lineNumber: 208,
-                                                columnNumber: 17
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 204,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-4xl font-bold text-blue-600 mb-2",
-                                            children: selectedPrize?.name
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 213,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-lg text-gray-600",
-                                            children: "당첨되었습니다!"
-                                        }, void 0, false, {
-                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                            lineNumber: 216,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 198,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        onClick: ()=>setIsModalOpen(false),
-                                        className: "w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700",
-                                        children: "확인"
-                                    }, void 0, false, {
-                                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                        lineNumber: 220,
-                                        columnNumber: 15
-                                    }, this)
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trophy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trophy$3e$__["Trophy"], {
+                                    className: "w-24 h-24 text-yellow-400 mb-4 animate-bounce"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 219,
+                                    lineNumber: 239,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
+                                    className: "text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-2",
+                                    children: "축하합니다!"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 240,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-xl text-blue-200",
+                                    children: "놀라운 행운이 당신과 함께!"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 243,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 197,
+                            lineNumber: 238,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex flex-col items-center py-6",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "relative w-full max-w-[300px] aspect-video bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-xl font-medium text-gray-400",
+                                            children: "상품 이미지"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                            lineNumber: 250,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                            lineNumber: 253,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
+                                            className: "absolute top-4 right-4 w-8 h-8 text-yellow-300"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                            lineNumber: 254,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 247,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-5xl font-extrabold text-blue-400 mb-3 text-center leading-tight",
+                                    children: selectedPrize?.name
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 257,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-lg text-blue-100",
+                                    children: "에 당첨되셨습니다!"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                    lineNumber: 260,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                            lineNumber: 246,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
+                            className: "pt-4",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                onClick: ()=>setIsModalOpen(false),
+                                className: "w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95",
+                                children: "확인"
+                            }, void 0, false, {
+                                fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                                lineNumber: 264,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                            lineNumber: 263,
                             columnNumber: 11
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                        lineNumber: 196,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+                    lineNumber: 237,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                lineNumber: 126,
+                lineNumber: 236,
                 columnNumber: 7
             }, this)
         ]
-    }, void 0, true);
+    }, void 0, true, {
+        fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
+        lineNumber: 106,
+        columnNumber: 5
+    }, this);
 }
 _s(LuckyDrawPage, "UB3QDibfJ7UCmGEisiIQ9oJXbak=");
 _c = LuckyDrawPage;

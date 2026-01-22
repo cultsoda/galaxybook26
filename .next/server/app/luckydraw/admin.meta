@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/luckydraw/layout,_N_T_/luckydraw/admin/layout,_N_T_/luckydraw/admin/page,_N_T_/luckydraw/admin"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/luckydraw/admin/__PAGE__",
+    "/luckydraw/admin",
+    "/luckydraw",
+    "/_index",
+    "/_head"
+  ]
+}

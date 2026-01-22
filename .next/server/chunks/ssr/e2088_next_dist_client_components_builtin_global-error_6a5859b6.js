@@ -1,0 +1,3 @@
+module.exports=[22586,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(48377);a.n(d("[project]/Desktop/galaxybook26/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},79888,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(48377);a.n(d("[project]/Desktop/galaxybook26/node_modules/next/dist/client/components/builtin/global-error.js"))},62934,a=>{"use strict";a.i(22586);var b=a.i(79888);a.n(b)}];
+
+//# sourceMappingURL=e2088_next_dist_client_components_builtin_global-error_6a5859b6.js.map

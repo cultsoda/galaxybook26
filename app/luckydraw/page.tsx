@@ -3,25 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
-
-const shakeAnimation = `
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    10% { transform: rotate(-5deg) scale(1.05); }
-    20% { transform: rotate(5deg) scale(0.95); }
-    30% { transform: rotate(-5deg) scale(1.05); }
-    40% { transform: rotate(5deg) scale(0.95); }
-    50% { transform: rotate(-3deg) scale(1.02); }
-    60% { transform: rotate(3deg) scale(0.98); }
-    70% { transform: rotate(-3deg) scale(1.02); }
-    80% { transform: rotate(3deg) scale(0.98); }
-    90% { transform: rotate(-1deg) scale(1.01); }
-  }
-  .animate-shake {
-    animation: shake 0.5s ease-in-out infinite;
-  }
-`;
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Gift, Sparkles, Trophy, Settings } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Prize {
   id: number;
@@ -34,8 +18,8 @@ export default function LuckyDrawPage() {
   const [prizes, setPrizes] = useState<Prize[]>([]);
   const [selectedPrize, setSelectedPrize] = useState<Prize | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // 이 줄 추가
-  const [isAnimating, setIsAnimating] = useState(false); // 이 줄 추가
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Load prizes from Google Sheets
   useEffect(() => {
@@ -45,20 +29,19 @@ export default function LuckyDrawPage() {
         const data = await response.json();
         if (data.prizes) {
           setPrizes(data.prizes);
-          setIsLoading(false); // 이 줄 추가
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Failed to load prizes:", error);
+        setIsLoading(false); // 로드 실패 시에도 로딩 상태 해제
       }
     };
 
     loadPrizesFromAPI();
   }, []);
 
-  // Save prizes to localStorage whenever they change
-
   const drawPrize = async () => {
-    if (isLoading || isAnimating) return; // isAnimating 추가
+    if (isLoading || isAnimating) return;
 
     const availablePrizes = prizes.filter((p) => p.remainingQty > 0);
 
@@ -67,7 +50,6 @@ export default function LuckyDrawPage() {
       return;
     }
 
-    // 애니메이션 시작
     setIsAnimating(true);
 
     const randomIndex = Math.floor(Math.random() * availablePrizes.length);
@@ -103,12 +85,12 @@ export default function LuckyDrawPage() {
           body: JSON.stringify({ prizeName: drawnPrize.name }),
         });
 
-        // 3초 후 애니메이션 종료 + 결과 표시
+        // 애니메이션 종료 및 결과 표시 지연
         setTimeout(() => {
           setIsAnimating(false);
           setSelectedPrize(drawnPrize);
           setIsModalOpen(true);
-        }, 1500);
+        }, 2500); // 회전 애니메이션을 충분히 보여주기 위해 시간 조정 (1.8s -> 2.5s)
       } else {
         setIsAnimating(false);
         alert("상품 수량 업데이트에 실패했습니다.");
@@ -121,112 +103,173 @@ export default function LuckyDrawPage() {
   };
 
   return (
-    <>
-      <style>{shakeAnimation}</style>
-      <main className="min-h-screen relative bg-gradient-to-br from-blue-600 to-indigo-700">
-        {/* Touch area */}
-        <div
-          className="min-h-screen flex flex-col items-center justify-center p-8 cursor-pointer select-none active:scale-[0.99] transition-transform"
-          onClick={drawPrize}
-        >
-          <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold text-white mb-4">럭키드로우</h1>
-            <p className="text-2xl text-blue-100">화면을 터치하여 추첨하세요</p>
-          </div>
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#0a0f1c] to-black text-white">
+      {/* 배경 장식 요소 */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-600/20 blur-[100px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-600/20 blur-[100px]" />
 
-          {/* Main image placeholder */}
-          <div
-            className="bg-gray-400 rounded-lg shadow-2xl flex items-center justify-center"
-            style={{ width: "800px", height: "600px" }}
+      <div
+        className="relative z-10 flex flex-col items-center justify-center w-full h-full text-center cursor-pointer select-none"
+        onClick={drawPrize}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-tight drop-shadow-lg mb-4">
+            Galaxy Lucky Draw
+          </h1>
+          <p className="text-xl md:text-2xl text-blue-300 font-light tracking-wide">
+            화면을 터치하여 행운을 시험해보세요!
+          </p>
+        </motion.div>
+
+        {/* Main interactive area: Spinning Galaxy Cube */}
+        <div className="relative w-72 h-72 md:w-96 md:h-96 perspective-[1000px]">
+          <motion.div
+            animate={
+              isAnimating
+                ? {
+                    rotateX: [0, 360, 720, 1080],
+                    rotateY: [0, 360, 720, 1080],
+                    scale: [1, 0.8, 1.1, 1],
+                  }
+                : {
+                    rotateX: 0,
+                    rotateY: 0,
+                    scale: 1,
+                  }
+            }
+            transition={
+              isAnimating
+                ? {
+                    duration: 2.5,
+                    ease: "easeInOut",
+                    times: [0, 0.4, 0.8, 1], // 가속 -> 감속 느낌
+                  }
+                : { type: "spring", stiffness: 200, damping: 20 }
+            }
+            className={`w-full h-full bg-gradient-to-br from-blue-700 to-purple-900 rounded-3xl shadow-2xl flex items-center justify-center border-4 border-blue-400/50 backdrop-blur-sm relative overflow-hidden ${
+               !isAnimating ? "hover:scale-105 active:scale-95 transition-transform" : ""
+            }`}
+            style={{
+              transformStyle: "preserve-3d",
+              boxShadow: isAnimating
+                ? "0 0 100px 20px rgba(59, 130, 246, 0.8), inset 0 0 50px rgba(168, 85, 247, 0.5)"
+                : "0 0 30px rgba(0,0,0,0.5)",
+            }}
           >
-            <span className="text-2xl font-semibold text-gray-700">
-              화면을 터치하여 럭키 드로우 상품을 뽑아보세요!
-            </span>
-          </div>
+             {/* 회전 시 빛나는 효과 (Flash) */}
+             <AnimatePresence>
+              {isAnimating && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 0.8, 0] }}
+                  transition={{ duration: 2.5, times: [0, 0.5, 1], repeat: 0 }}
+                  className="absolute inset-0 bg-white z-20 mix-blend-overlay"
+                />
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              {!isAnimating ? (
+                <motion.div
+                  key="gift-icon"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0, rotate: 180 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute flex flex-col items-center justify-center z-10"
+                >
+                  <Gift className="w-32 h-32 text-blue-200 drop-shadow-[0_0_15px_rgba(191,219,254,0.5)]" />
+                  <Sparkles className="absolute -top-4 -right-4 w-12 h-12 text-yellow-300 animate-pulse" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="drawing-text"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1.2 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                  className="absolute z-10 text-center"
+                >
+                   <div className="text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
+                    ?
+                   </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+            {/* 큐브 내부 장식 (그리드 패턴 등) */}
+             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-20 bg-center bg-cover pointer-events-none mix-blend-overlay"></div>
+          </motion.div>
         </div>
 
-        {/* Admin badge in bottom-right corner */}
-        <Link
-          href="/luckydraw/admin"
-          className="fixed bottom-8 right-8 opacity-30 hover:opacity-100 transition-opacity"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg">
-            <svg
-              className="w-6 h-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-          </div>
-        </Link>
-        {/* 박스 흔들기 애니메이션 */}
-        {isAnimating && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="animate-shake">
-              <div className="w-64 h-64 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl shadow-2xl flex items-center justify-center relative">
-                {/* 리본 */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-32 bg-yellow-400 -translate-y-12"></div>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-400"></div>
-
-                {/* 물음표 */}
-                <span className="text-8xl text-white font-bold">?</span>
-              </div>
-            </div>
-            <p className="absolute bottom-32 text-2xl text-white font-bold">
-              추첨 중...
-            </p>
-          </div>
+        {/* Touch prompt */}
+        {!isAnimating && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="mt-10 text-2xl text-blue-200 animate-pulse"
+          >
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-blue-400 mr-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            </span>
+            화면 어디든 터치하세요!
+          </motion.p>
         )}
+      </div>
 
-        {/* Prize result modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="sm:max-w-md backdrop-blur-sm bg-white/95">
-            <div className="flex flex-col items-center py-6">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                축하합니다!
-              </h2>
+      {/* Admin badge */}
+      <Link
+        href="/luckydraw/admin"
+        className="fixed bottom-8 right-8 p-3 bg-white/10 backdrop-blur-md rounded-full opacity-60 hover:opacity-100 transition-opacity duration-300 shadow-lg group"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Settings className="w-7 h-7 text-gray-300 group-hover:rotate-90 transition-transform duration-300" />
+      </Link>
 
-              {/* Prize image placeholder */}
-              <div
-                className="bg-gray-300 rounded-lg mb-6 flex items-center justify-center"
-                style={{ width: "400px", height: "300px" }}
-              >
-                <span className="text-lg font-medium text-gray-600">
-                  상품 이미지
-                </span>
-              </div>
+      {/* Prize result modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-md p-8 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-2xl">
+          <DialogHeader className="flex flex-col items-center">
+            <Trophy className="w-24 h-24 text-yellow-400 mb-4 animate-bounce" />
+            <DialogTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-2">
+              축하합니다!
+            </DialogTitle>
+            <p className="text-xl text-blue-200">놀라운 행운이 당신과 함께!</p>
+          </DialogHeader>
 
-              <p className="text-4xl font-bold text-blue-600 mb-2">
-                {selectedPrize?.name}
-              </p>
-              <p className="text-lg text-gray-600">당첨되었습니다!</p>
+          <div className="flex flex-col items-center py-6">
+            <div
+              className="relative w-full max-w-[300px] aspect-video bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner"
+            >
+              <span className="text-xl font-medium text-gray-400">
+                상품 이미지
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <Sparkles className="absolute top-4 right-4 w-8 h-8 text-yellow-300" />
             </div>
 
-            <DialogFooter>
-              <Button
-                onClick={() => setIsModalOpen(false)}
-                className="w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700"
-              >
-                확인
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </main>
-    </>
+            <p className="text-5xl font-extrabold text-blue-400 mb-3 text-center leading-tight">
+              {selectedPrize?.name}
+            </p>
+            <p className="text-lg text-blue-100">에 당첨되셨습니다!</p>
+          </div>
+
+          <DialogFooter className="pt-4">
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              className="w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95"
+            >
+              확인
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </main>
   );
 }
