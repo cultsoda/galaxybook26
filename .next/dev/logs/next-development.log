@@ -784,3 +784,14 @@ Import traces:
 [56:35:00.098] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/luckydraw color: rgb(120, 120, 120) color: inherit {"dp":"/luckydraw","o":"http://localhost:3000/luckydraw","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769160690122}
 [56:35:31.951] Server  LOG      ✓ Compiled in 139ms
 [56:36:06.608] Server  LOG      ✓ Compiled in 80ms
+[56:38:16.443] Server  LOG     Attempting to append: "2026. 1. 23. 오후 6:34:46" "갤럭시 북6 키링"
+[56:38:20.222] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[56:38:20.222] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[56:42:49.964] Server  LOG      ✓ Compiled in 763ms
+[56:43:01.372] Server  LOG     Attempting to append: "2026. 1. 23. 오후 6:39:31" "교보문고 기프트 카드"
+[56:43:05.179] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[56:43:05.179] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[56:46:40.932] Server  LOG      ✓ Compiled in 577ms
+[56:47:25.367] Server  LOG      ✓ Compiled in 265ms
+[56:48:34.166] Server  LOG      ✓ Compiled in 216ms
+[56:49:35.290] Server  LOG      ✓ Compiled in 294ms

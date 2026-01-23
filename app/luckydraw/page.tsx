@@ -173,7 +173,7 @@ export default function LuckyDrawPage() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-tight drop-shadow-lg mb-4">
+          <h1 className="text-[5.625rem] md:text-[6.75rem] lg:text-[9rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-tight drop-shadow-lg mb-4">
             Touch Lucky Draw
           </h1>
           <p className="text-4xl md:text-3xl text-blue-300 font-light tracking-wide">
@@ -265,27 +265,45 @@ export default function LuckyDrawPage() {
 
       {/* Prize result modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="w-[32rem] h-[24rem] md:w-[45rem] md:h-[34rem] lg:w-[51rem] lg:h-[38rem] max-w-none p-8 md:p-12 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-3xl flex flex-col">
-          <DialogHeader className="flex flex-col items-center flex-shrink-0">
-            <Trophy className="w-28 h-28 md:w-36 md:h-36 text-yellow-400 mb-4 animate-bounce" />
-            <DialogTitle className="text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-3">
-              축하합니다!
-            </DialogTitle>
-            <p className="text-2xl md:text-3xl lg:text-4xl text-blue-200">
-              [{selectedPrize?.name}] 에 당첨되셨습니다!
-            </p>
-          </DialogHeader>
-
-          <div className="flex flex-col items-center justify-center flex-1 py-6">
-            <p className="text-2xl md:text-3xl text-blue-100 text-center">
-              ※ 현장 직원 안내에 따라 경품을 수령해주세요.
-            </p>
+        <DialogContent className="w-[32rem] h-[36rem] md:w-[45rem] md:h-[50rem] lg:w-[51rem] lg:h-[55rem] max-w-none p-6 md:p-10 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-3xl flex flex-col sm:top-[55%]">
+          {/* 트로피 아이콘 */}
+          <div className="flex justify-center flex-shrink-0">
+            <Trophy className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-yellow-400 animate-bounce" />
           </div>
 
-          <DialogFooter className="pt-4 flex-shrink-0">
+          {/* 제목 */}
+          <DialogHeader className="flex flex-col items-center flex-shrink-0 mt-2 md:mt-4">
+            <DialogTitle className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400">
+              축하합니다!
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* 상품명 */}
+          <p className="text-xl md:text-2xl lg:text-3xl text-blue-200 text-center mt-2 md:mt-4 flex-shrink-0">
+            [{selectedPrize?.name}] 에 당첨되셨습니다!
+          </p>
+
+          {/* 상품 이미지 영역 */}
+          <div className="flex-1 flex items-center justify-center py-4 md:py-6">
+            <div className="relative w-full max-w-[240px] md:max-w-[320px] lg:max-w-[380px] aspect-video bg-gray-700 rounded-xl flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner">
+              <span className="text-lg md:text-xl font-medium text-gray-400">
+                상품 이미지
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <Sparkles className="absolute top-3 right-3 w-6 h-6 md:w-8 md:h-8 text-yellow-300" />
+            </div>
+          </div>
+
+          {/* 안내 문구 */}
+          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 text-center flex-shrink-0 mb-4 md:mb-6">
+            ※ 현장 직원 안내에 따라 경품을 수령해주세요.
+          </p>
+
+          {/* 확인 버튼 */}
+          <DialogFooter className="flex-shrink-0">
             <Button
               onClick={() => setIsModalOpen(false)}
-              className="w-full h-20 md:h-24 text-3xl md:text-4xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95"
+              className="w-full h-14 md:h-16 lg:h-20 text-xl md:text-2xl lg:text-3xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95"
             >
               확인
             </Button>
