@@ -646,8 +646,12 @@ function LuckyDrawPage() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-xl text-blue-200",
-                                    children: "놀라운 행운이 당신과 함께!"
-                                }, void 0, false, {
+                                    children: [
+                                        "[",
+                                        selectedPrize?.name,
+                                        "] 에 당첨되셨습니다!"
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
                                     lineNumber: 238,
                                     columnNumber: 13
@@ -693,19 +697,11 @@ function LuckyDrawPage() {
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-5xl font-extrabold text-blue-400 mb-3 text-center leading-tight",
-                                    children: selectedPrize?.name
+                                    className: "text-lg text-blue-100 text-center",
+                                    children: "※ 현장 직원 안내에 따라 경품을 수령해주세요."
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
                                     lineNumber: 252,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$galaxybook26$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-lg text-blue-100",
-                                    children: "에 당첨되셨습니다!"
-                                }, void 0, false, {
-                                    fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                    lineNumber: 255,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -722,12 +718,12 @@ function LuckyDrawPage() {
                                 children: "확인"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                                lineNumber: 259,
+                                lineNumber: 258,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/galaxybook26/app/luckydraw/page.tsx",
-                            lineNumber: 258,
+                            lineNumber: 257,
                             columnNumber: 11
                         }, this)
                     ]

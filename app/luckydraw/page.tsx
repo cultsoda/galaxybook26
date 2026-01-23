@@ -235,7 +235,7 @@ export default function LuckyDrawPage() {
             <DialogTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-2">
               축하합니다!
             </DialogTitle>
-            <p className="text-xl text-blue-200">놀라운 행운이 당신과 함께!</p>
+            <p className="text-xl text-blue-200">[{selectedPrize?.name}] 에 당첨되셨습니다!</p>
           </DialogHeader>
 
           <div className="flex flex-col items-center py-6">
@@ -249,10 +249,9 @@ export default function LuckyDrawPage() {
               <Sparkles className="absolute top-4 right-4 w-8 h-8 text-yellow-300" />
             </div>
 
-            <p className="text-5xl font-extrabold text-blue-400 mb-3 text-center leading-tight">
-              {selectedPrize?.name}
+            <p className="text-lg text-blue-100 text-center">
+              ※ 현장 직원 안내에 따라 경품을 수령해주세요.
             </p>
-            <p className="text-lg text-blue-100">에 당첨되셨습니다!</p>
           </div>
 
           <DialogFooter className="pt-4">
