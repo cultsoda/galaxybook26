@@ -688,3 +688,68 @@ Import traces:
 [31:47:01.976] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [31:47:01.976] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/storyboard","route":"/storyboard"}
 [31:47:01.976] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769071411907}
+[55:44:03.657] Server  LOG      ✓ Compiled in 1039ms
+[55:44:40.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[55:44:40.774] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[55:44:40.774] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/storyboard","route":"/storyboard"}
+[55:44:40.774] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/storyboard color: rgb(120, 120, 120) color: inherit {"dp":"/storyboard","o":"http://localhost:3000/storyboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769157670781}
+[55:44:45.430] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[55:44:45.521] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[55:44:45.521] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[55:44:45.521] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769157675529}
+[55:44:48.375] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/luckydraw color: rgb(120, 120, 120) color: inherit {"dp":"/luckydraw","o":"http://localhost:3000/luckydraw","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769157678351}
+[55:44:57.207] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:44:57.207] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:44:58.071] Server  LOG     Attempting to append: "2026. 1. 23. 오후 5:41:28" "인텔 스티커팩"
+[55:44:58.157] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:44:58.157] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:44:59.011] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:44:59.011] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:45:00.030] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:45:00.030] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:45:01.804] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:45:01.804] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:21.350] Server  LOG      ✓ Compiled in 394ms
+[55:46:30.686] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:30.686] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:31.975] Server  LOG     Attempting to append: "2026. 1. 23. 오후 5:43:02" "에코백"
+[55:46:32.496] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:32.496] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:33.496] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:33.496] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:35.674] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:35.674] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:39.420] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[55:46:39.560] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[55:46:39.560] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/luckydraw","route":"/luckydraw"}
+[55:46:39.560] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/luckydraw color: rgb(120, 120, 120) color: inherit {"dp":"/luckydraw","o":"http://localhost:3000/luckydraw","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769157789567}
+[55:46:41.027] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:41.027] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:41.694] Server  LOG     Attempting to append: "2026. 1. 23. 오후 5:43:11" "텀블러"
+[55:46:41.789] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:41.790] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:42.844] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:42.844] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:43.843] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:43.843] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:45.457] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:45.457] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:47.091] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:47.091] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:47.843] Server  LOG     Attempting to append: "2026. 1. 23. 오후 5:43:17" "USB 메모리"
+[55:46:47.933] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:47.933] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:48.912] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:48.913] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:49.894] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:49.894] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[55:46:51.464] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:46:51.464] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:48:45.157] Server  LOG      ✓ Compiled in 110ms
+[55:50:08.889] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[55:50:08.889] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[55:50:08.889] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/luckydraw","route":"/luckydraw"}
+[55:50:08.889] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/luckydraw color: rgb(120, 120, 120) color: inherit {"dp":"/luckydraw","o":"http://localhost:3000/luckydraw","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1769157998949}
+[55:50:17.468] Server  LOG     Attempting to append: "2026. 1. 23. 오후 5:46:47" "노트북 파우치"
+[55:50:21.206] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[55:50:21.206] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
