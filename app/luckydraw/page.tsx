@@ -3,7 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Gift, Sparkles, Trophy, Settings } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -136,7 +142,7 @@ export default function LuckyDrawPage() {
 
       {/* 우상단: Galaxy Book6 */}
       <div className="absolute top-8 right-10 z-20">
-        <span className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-300 tracking-tight">
+        <span className="text-6xl md:text-8xl font-bold text-blue-300 tracking-tight">
           Galaxy Book6
         </span>
       </div>
@@ -170,14 +176,15 @@ export default function LuckyDrawPage() {
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-purple-200 tracking-tight drop-shadow-lg mb-4">
             Touch Lucky Draw
           </h1>
-          <p className="text-2xl md:text-3xl text-blue-300 font-light tracking-wide">
-            {isAnimating ? "행운이 다가오고 있습니다..." : "화면을 터치하여 행운을 시험해보세요!"}
+          <p className="text-4xl md:text-3xl text-blue-300 font-light tracking-wide">
+            {isAnimating
+              ? "행운이 다가오고 있습니다..."
+              : "화면을 터치하여 행운을 시험해보세요!"}
           </p>
         </motion.div>
 
         {/* 뽑기 박스 영역 (확대) */}
         <div className="relative w-[40rem] h-[30rem] md:w-[56rem] md:h-[42rem] lg:w-[64rem] lg:h-[48rem] flex items-center justify-center">
-
           {/* 카운트다운 애니메이션 */}
           <AnimatePresence>
             {isAnimating && countdown !== null && countdown > 0 ? (
@@ -226,8 +233,7 @@ export default function LuckyDrawPage() {
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
                 className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-3xl border-4 border-blue-400/30 blur-sm flex items-center justify-center"
-              >
-              </motion.div>
+              ></motion.div>
             )}
           </AnimatePresence>
         </div>
@@ -259,35 +265,27 @@ export default function LuckyDrawPage() {
 
       {/* Prize result modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-md p-8 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-2xl">
-          <DialogHeader className="flex flex-col items-center">
-            <Trophy className="w-24 h-24 text-yellow-400 mb-4 animate-bounce" />
-            <DialogTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-2">
+        <DialogContent className="w-[32rem] h-[24rem] md:w-[45rem] md:h-[34rem] lg:w-[51rem] lg:h-[38rem] max-w-none p-8 md:p-12 bg-gradient-to-br from-slate-800 to-slate-900 text-white border border-blue-700/50 shadow-xl rounded-3xl flex flex-col">
+          <DialogHeader className="flex flex-col items-center flex-shrink-0">
+            <Trophy className="w-28 h-28 md:w-36 md:h-36 text-yellow-400 mb-4 animate-bounce" />
+            <DialogTitle className="text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 mb-3">
               축하합니다!
             </DialogTitle>
-            <p className="text-xl text-blue-200">[{selectedPrize?.name}] 에 당첨되셨습니다!</p>
+            <p className="text-2xl md:text-3xl lg:text-4xl text-blue-200">
+              [{selectedPrize?.name}] 에 당첨되셨습니다!
+            </p>
           </DialogHeader>
 
-          <div className="flex flex-col items-center py-6">
-            <div
-              className="relative w-full max-w-[300px] aspect-video bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner"
-            >
-              <span className="text-xl font-medium text-gray-400">
-                상품 이미지
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <Sparkles className="absolute top-4 right-4 w-8 h-8 text-yellow-300" />
-            </div>
-
-            <p className="text-lg text-blue-100 text-center">
+          <div className="flex flex-col items-center justify-center flex-1 py-6">
+            <p className="text-2xl md:text-3xl text-blue-100 text-center">
               ※ 현장 직원 안내에 따라 경품을 수령해주세요.
             </p>
           </div>
 
-          <DialogFooter className="pt-4">
+          <DialogFooter className="pt-4 flex-shrink-0">
             <Button
               onClick={() => setIsModalOpen(false)}
-              className="w-full h-16 text-2xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95"
+              className="w-full h-20 md:h-24 text-3xl md:text-4xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg transition-all active:scale-95"
             >
               확인
             </Button>
